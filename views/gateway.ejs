@@ -18,9 +18,9 @@
   </head>
 
   <body
-    class="flex flex-col justify-center items-center min-h-svh xl:text-[28px] lg:text-[26px] md:text-[22px] text-[18px] bg-[#eee] dark:bg-[#22232a] relative">
+    class="flex flex-col justify-center dark:text-[#ceced2] items-center min-h-svh xl:text-[28px] lg:text-[26px] md:text-[22px] text-[18px] bg-[#eee] dark:bg-[#22232a] relative">
     <main class="md:w-1/2 lg:w-1/3 2xl:w-1/4">
-      <header class="flex flex-col items-center justify-center mb-6 dark:text-[#ceced2]">
+      <header class="flex flex-col items-center justify-center mb-6 ">
         <div id="avatar">
           <a href="https://aces-rmdssoe.tech"><img
               src="https://raw.githubusercontent.com/MadhurJ20/Invoice/master/assets/ACES_Logo.png" alt="ACES Logo"
@@ -44,6 +44,10 @@
         </section>
       </header>
       <hr class="border-neutral-300 block mb-8 lg:mx-16" />
+      <div class="flex justify-center relative text-base">
+        <input type="text" id="search-input" placeholder="Search..." class="mb-8 py-2 px-4 rounded mx-8">
+        <i class="fa-solid fa-search absolute right-12 top-[28%] transform -translate-y-1/2 text-gray-500"></i>
+      </div>
       <section id="linkwrap" class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6 items-center justify-center">
         <a href="/Membership" class="block p-4 pt-2 border-2 w-full cardlink">
           <aside class="text-left w-full px-2 my-2 text-gray-500 small-caps text-xs md:text-sm"> 2024 October </aside>
@@ -107,6 +111,22 @@
 
     themeToggleBtn.addEventListener('click', toggleTheme);
     setTheme();
+
+    const searchInput = document.getElementById('search-input');
+    const links = document.getElementById('linkwrap');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const items = links.getElementsByTagName('a');
+
+      for (let item of items) {
+        const textContent = item.textContent.toLowerCase();
+        if (textContent.includes(searchTerm)) {
+          item.style.display = ''; // Show item
+        } else {
+          item.style.display = 'none'; // Hide item
+        }
+      }
+    });
 
   </script>
   <script>
