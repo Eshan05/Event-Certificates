@@ -1,0 +1,40 @@
+{
+  "name": "event-certificates",
+  "version": "1.1.0",
+  "main": "gateway.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node app.js & wait-on http://localhost:3000"
+  },
+  "keywords": [
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Mongoose",
+    "PDFLib",
+    "Certificates",
+    "Jest"
+  ],
+  "author": "Eshan Nahar",
+  "license": "GPL-3.0-only",
+  "description": "A certificate handler website. Built by 'Eshan05' and 'MadhurJ20'. Made in Node/Express.",
+  "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
+    "body-parser": "^1.20.3",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "fontkit": "^2.0.4",
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.0.1",
+    "mongoose": "^8.6.3",
+    "nodemon": "^3.1.7",
+    "supertest": "^7.0.0",
+    "wait-on": "^8.0.1"
+  }
+}

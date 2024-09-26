@@ -1,0 +1,9 @@
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+/node_modules
+.env.local
+**/*.txt
+CSV_Handlers/csvProcessor.js
+CSV_Handlers/membershipProcessor.js
+views/index.ejs

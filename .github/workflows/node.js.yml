@@ -1,0 +1,34 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - name: Set up environment variables
+      env:
+        ATLAS_URI: ${{ secrets.ATLAS_URI }}  # Ensure this line is correct and matches
+      run: |
+        echo "ATLAS_URI is set"
+    - name: Run Application
+      env:
+        ATLAS_URI: ${{ secrets.ATLAS_URI }}  # Pass the secret to your application
+      run: npm run start
+    # - run: npm test --if-present

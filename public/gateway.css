@@ -1,0 +1,16 @@
+.cardlink {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 5px 5px 1rem #c7c7c7,
+    -5px -5px 1rem #ffffff;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: inset 3px 3px 1rem #c7c7c7,
+      inset -3px -3px 1rem #ffffff;
+    transform: translateY(.25rem);
+  }
+}
