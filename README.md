@@ -13,9 +13,9 @@ A certificate website with ability to hand out multiple certificate for various 
 
 ## In Future
 
-- Make separate `models/` folder for better modularity
-- Make a more or less centralized CSV Processor in conjunction to above
-- Implement dark mode
+- [ ] Make separate `models/` folder for better modularity
+- [ ] Make a more or less centralized CSV Processor in conjunction to above
+- [ ] Implement dark mode
 
 # Setup
 

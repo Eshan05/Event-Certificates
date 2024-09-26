@@ -28,6 +28,41 @@ h2 {
   }
 }
 
+.dark input,
+.dark select {
+  background-color: hsl(233, 8%, 18%);
+  border-radius: 8px;
+  box-shadow:
+    inset 2px 2px 4px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+.dark input:focus {
+  box-shadow:
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 3px rgba(255, 255, 255, 0.1);
+}
+
+.dark button:not(#theme-toggle) {
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  box-shadow: 6px 6px 8px #212121,
+    -6px -6px 8px #393939;
+}
+
+.dark button:not(#theme-toggle):hover {
+  box-shadow: 4px 4px 6px #212121,
+    -4px -4px 6px #393939;
+}
+
+.dark button:not(#theme-toggle):active {
+  box-shadow:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.2);
+}
+
+
 input,
 select {
   display: block;
@@ -43,18 +78,18 @@ input:focus {
   outline: none !important;
 }
 
-button {
+button:not(#theme-toggle) {
   box-shadow: 3px 3px 5px #babecc, -4px -4px 10px #fff;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   pointer-events: all;
 }
 
-button:hover {
+button:not(#theme-toggle):hover {
   box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
 }
 
-button:active {
+button:not(#theme-toggle):active {
   box-shadow: inset 2px 2px 3px #babecc, inset -2px -2px 3px #fff;
 }
 
