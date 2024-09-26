@@ -8,7 +8,9 @@
     <title>Certificate | Your Organization</title>
     <link rel="icon" type="image/x-icon"
       href="https://raw.githubusercontent.com/ACES-RMDSSOE/Website/main/images/favicon.ico" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com" rel="preload"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
       integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,7 +24,7 @@
         <div id="avatar">
           <a href="https://aces-rmdssoe.tech"><img
               src="https://raw.githubusercontent.com/MadhurJ20/Invoice/master/assets/ACES_Logo.png" alt="ACES Logo"
-              border="0" class="w-[3em] h-[3em] rounded-[50%] mt-3" /></a>
+              border="0" class="w-[3em] h-[3em] rounded-[50%] mt-3" loading="lazy" /></a>
         </div>
         <h1 class="pt-4 pb-3 text-3xl font-bold xl:text-5xl md:text-4xl">
           <a href="/">Certificate</a>
@@ -72,7 +74,7 @@
       class="mt-6 lg:text-[.75em] md:text-[.8em] text-base p-2 w-[20em] lg:w-[25em] text-justify lg:mb-8 md:mb-8 dark:text-[#ceced2]">
       Thank you for your valuable contribution. We sincerely appreciate your time here and hope you enjoyed your time
       with us. </section>
-    <footer class="flex flex-row gap-x-4 items-center justify-center mt-auto pt-8">
+    <footer class="flex flex-row gap-x-4 items-center justify-center mt-auto pt-8 pb-2">
       <button id="theme-toggle" class="aspect-square inline-block w-5 md:w-6 pt-px">
         <svg class="dark:hidden" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
           <path class="fill-black"
@@ -92,9 +94,27 @@
   </body>
   <script>
     const themeToggleBtn = document.getElementById('theme-toggle');
-    themeToggleBtn.addEventListener('click', () => {
+    function setTheme() {
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    function toggleTheme() {
       document.documentElement.classList.toggle('dark');
-    });
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', toggleTheme);
+    setTheme();
+
   </script>
   <script>
     tailwind.config = {
