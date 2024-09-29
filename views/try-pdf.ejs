@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate | Your Organization</title>
+    <link rel="icon" type="image/x-icon"
+      href="https://raw.githubusercontent.com/ACES-RMDSSOE/Website/main/images/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com" rel="preload"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="template.css" />
+  </head>
+
+  <body
+    class="flex flex-col justify-center dark:text-[#ceced2] items-center min-h-svh xl:text-[28px] lg:text-[26px] md:text-[22px] text-[18px] bg-[#eee] dark:bg-[#272727] relative">
+    <main class="w-3/4 mx-6 2xl:w-1/2">
+      <header class="flex flex-col items-center justify-center mb-6 ">
+        <h1 class="pt-4 pb-3 text-3xl font-bold xl:text-5xl md:text-4xl">
+          <a href="/">Try out Text</a>
+        </h1>
+      </header>
+      <hr class="border-neutral-300 block mb-8 lg:mx-16" />
+      <form action="/try-pdf" method="POST"
+        class="flex flex-col p-5 mt-8 rounded border-2 border-[#aaa4] bg-[#EBECF0] dark:bg-[#2D2D2D] items-center justify-center dark:text-[#ceced2]">
+        <section id="input-fields" class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-x-16 items-center">
+          <!-- <div class="input-group" class="flex flex-col gap-y-3">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="inputs[0][value]" required>
+            <label for="fontFamily">Font Family:</label>
+            <select name="inputs[0][fontFamily]" required class=" block bg-transparent dark:bg-[#2d2d2d]
+              outline-none border-none rounded-lg py-2 px-2 my-3 lg:text-[.75em] text-[.75em]">
+              <option value="Anastasia-Script">Anastasia-Script</option>
+              <option value="Graduate-Regular">Graduate-Regular</option>
+            </select>
+            <label for="fontSize">Font Size:</label>
+            <input type="number" name="inputs[0][fontSize]" value="20" required>
+          </div> -->
+        </section>
+        <section class="flex md:flex-row flex-col w-full justify-evenly items-center my-6 mx-2 p-1">
+          <button type="button" onclick="addInputField()"
+            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide"
+            style="font-variant: small-caps">Add Another Input</button>
+          <button type="button" onclick="removeInputField()"
+            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide"
+            style="font-variant: small-caps">Remove Last Input</button>
+          <button type="submit"
+            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide"
+            style="font-variant: small-caps">Generate PDF</button>
+        </section>
+      </form> <!--noformat-->
+    </main>
+    <% if (pdfUrl) { %>
+      <section class="flex flex-col gap-y-6 justify-center mx-6 w-3/4 lg:w-full mt-16 rounded">
+        <!-- <h2 class="text-center">Certificate</h2> -->
+        <object data="<%= pdfUrl %>" type="application/pdf" class="h-[400px] w-full lg:w-1/2 mx-auto block rounded shadow-md">
+          <iframe src="<%= pdfUrl %>" class="w-full h-full"></iframe> 
+        </object>
+      </section>
+    <% } %>
+    <!--noformat--> <footer class="flex flex-row gap-x-4 items-center justify-center mt-auto pt-8 pb-2">
+        <button id="theme-toggle" class="aspect-square inline-block w-5 md:w-6 pt-px">
+          <svg class="dark:hidden" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path class="fill-black"
+              d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z" />
+            <path class="fill-black" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" />
+          </svg>
+          <svg class="hidden dark:block" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path class="fill-white"
+              d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z" />
+            <path class="fill-white"
+              d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z" />
+          </svg>
+        </button>
+        <p class="dark:text-white text-black"> &copy; 2024 Your Organization. All rights reserved. </p>
+      </footer>
+      <!-- <aside id="links" class="absolute"></aside> -->
+  </body>
+  <script>
+    let inputCount = 1;
+
+    function addInputField() {
+      const inputFieldsDiv = document.getElementById('input-fields');
+      const newField = document.createElement('div');
+      newField.classList.add('input-group');
+      newField.setAttribute('data-input-id', inputCount);
+      newField.innerHTML = `
+        <label for="input${inputCount}" class="text-center color-[#61677C] tracking-wide text-[.75em] small-caps">Input ${inputCount}:</label>
+        <input type="text" name="inputs[${inputCount}][value]" required
+          class="dark:bg-[#2d2d2d] rounded-lg py-2 px-3 my-3 lg:text-[.75em] text-[.75em]">
+        <label for="fontFamily" class="text-center color-[#61677C] tracking-wide text-[.75em] small-caps">Font Family:</label>
+        <select name="inputs[${inputCount}][fontFamily]" required
+          class="bg-transparent dark:bg-[#2d2d2d] rounded-lg py-2 px-2 my-3 lg:text-[.75em] text-[.75em]">
+          <option value="Anastasia-Script">Anastasia-Script</option>
+          <option value="Graduate-Regular">Graduate-Regular</option>
+          <!-- Add more options as needed -->
+        </select>
+        <label for="fontSize" class="text-center color-[#61677C] tracking-wide text-[.75em] small-caps">Font Size:</label>
+        <input type="number" name="inputs[${inputCount}][fontSize]" value="20" required
+          class="dark:bg-[#2d2d2d] rounded-lg py-2 px-3 my-3 lg:text-[.75em] text-[.75em]">
+
+        <section class="flex gap-x-2 mt-2">
+          <input type="number" name="inputs[${inputCount}][xCoord]" required placeholder="X Coordinate"
+            class="dark:bg-[#2d2d2d] rounded-lg py-2 px-3 my-3 lg:text-[.75em] text-[.75em]" />
+          <input type="number" name="inputs[${inputCount}][yCoord]" required placeholder="Y Coordinate"
+            class="dark:bg-[#2d2d2d] rounded-lg py-2 px-3 my-3 lg:text-[.75em] text-[.75em]" />
+        </section>
+          `;
+      inputFieldsDiv.appendChild(newField);
+      inputCount++;
+    }
+
+    function removeInputField() {
+      const inputFieldsDiv = document.getElementById('input-fields');
+      const inputGroups = inputFieldsDiv.getElementsByClassName('input-group');
+
+      if (inputGroups.length > 0) {
+        inputFieldsDiv.removeChild(inputGroups[inputGroups.length - 1]);
+        inputCount--;
+      }
+    }
+  </script>
+  <script>
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    function setTheme() {
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', toggleTheme);
+    setTheme();
+
+  </script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // or 'media' for automatic preference
+    }
+  </script>
+
+</html>
