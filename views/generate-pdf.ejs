@@ -87,6 +87,7 @@
       const inputFieldsDiv = document.getElementById('input-fields');
       const newField = document.createElement('div');
       newField.classList.add('input-group');
+      newField.setAttribute('data-input-id', inputCount);
       newField.innerHTML = `
         <label for="input${inputCount}" class="text-center color-[#61677C] tracking-wide text-[.75em] small-caps">Input ${inputCount}:</label>
         <input type="text" name="inputs[${inputCount}][value]" required
@@ -111,6 +112,16 @@
           `;
       inputFieldsDiv.appendChild(newField);
       inputCount++;
+    }
+
+    function removeInputField() {
+      const inputFieldsDiv = document.getElementById('input-fields');
+      const inputGroups = inputFieldsDiv.getElementsByClassName('input-group');
+
+      if (inputGroups.length > 0) {
+        inputFieldsDiv.removeChild(inputGroups[inputGroups.length - 1]);
+        inputCount--;
+      }
     }
   </script>
   <script>
