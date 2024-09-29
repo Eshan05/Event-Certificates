@@ -20,15 +20,16 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 
 # Setup
 
-1. Firstly make a MongoDB Atlas account and connect to it (Preferably by VSCode Extension)
+1. Firstly make a MongoDB Atlas account and connect to it. (Preferably by VSCode Extension)
 2. Put your connection string in `.env` file.
 3. Install necessary packages via `npm i`.
 4. Test out the existing events by uploading `node ...js` (For using `csvProcessor` make proper file like `membershipProcessor`) which will upload the data into your MongoDB collections. Then run `nodemon app.js` to start the app.
 5. If it throws error then check firstly it says `Connected to MongoDB` in console, if not then connect to. (Usually by whitelisting your IP)
 6. Open `localhost:3000` and then try it out. On `/` you will see links to the other events.
-7. Deployable if you wish (Check `.github/`)
-8. If you wish to use `try-pdf.ejs` then run `node generate.js`
+7. Deployable if you wish. (Check `.github/`)
+8. If you wish to use `try-pdf.ejs` then run `node generate.js`.
 
 ### Notes
 
-See LICENSE.
+- See LICENSE.
+- I have put `generate.js` to run on separately from `app.js` with regards to production.
