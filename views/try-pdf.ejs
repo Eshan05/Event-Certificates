@@ -78,6 +78,7 @@
         </button>
         <p class="dark:text-white text-black"> &copy; 2024 Your Organization. All rights reserved. </p>
       </footer>
+      <div id="toast-container" class="toast-container fixed bottom-4 right-4 text-sm"></div>
       <!-- <aside id="links" class="absolute"></aside> -->
   </body>
   <script>
@@ -112,6 +113,7 @@
           `;
       inputFieldsDiv.appendChild(newField);
       inputCount++;
+      showToast('success', 'Input Added', "Successfully added a new input field.");
     }
 
     function removeInputField() {
@@ -121,6 +123,7 @@
       if (inputGroups.length > 0) {
         inputFieldsDiv.removeChild(inputGroups[inputGroups.length - 1]);
         inputCount--;
+        showToast('success', 'Input Removed', "Successfully removed last input field.");
       }
     }
   </script>
@@ -128,11 +131,8 @@
     const themeToggleBtn = document.getElementById('theme-toggle');
     function setTheme() {
       const currentTheme = localStorage.getItem('theme');
-      if (currentTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      if (currentTheme === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
     }
 
     function toggleTheme() {
@@ -153,5 +153,6 @@
       darkMode: 'class', // or 'media' for automatic preference
     }
   </script>
+  <script src="util.js"></script>
 
 </html>

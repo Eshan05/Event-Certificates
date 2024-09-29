@@ -8,7 +8,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(__dirname + "/public"));
 let lastPdf; // Variable to store the last generated PDF
 
 app.get('/try-pdf', (req, res) => {
