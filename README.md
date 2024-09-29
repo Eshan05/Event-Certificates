@@ -1,6 +1,6 @@
 # Event Certificate Website
 
-![Main](./public/1727322512391.png "Main")
+![Main](./public/images/1727322512391.png "Main")
 
 A certificate website with ability to hand out multiple certificate in PDF Format for various events. It has a nice, minimal and interactive UI which is responsive for small as well as large screens. Built using Node/Express and MongoDB it allows for multiple template, multiple schemas/models and a central CSV processor alongside indiviual ones. At a glance the app consists of
 
@@ -11,12 +11,15 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - A minimal and responsive UI which can be easily modified as per liking. Uses **Tailwind CSS** and has dark mode.
 - Scalable for large datasets with good error handling and easy to modify.
 - Allows you to test out placement of text on any PDF via `try-pdf.ejs`. Includes setting font size and font family.
+- Features a great, minimal and stacking toast functionality with various types as per requirements
 
 ## In Future
 
 - [X] Make a more or less centralized CSV Processor
 - [X] Implement dark mode
 - [X] Make a new route for testing out text on PDF
+- [ ] Better error handling for server actions (Possibly use toasts there too)
+- [ ] Write tests
 
 # Setup
 

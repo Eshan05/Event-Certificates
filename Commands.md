@@ -23,7 +23,6 @@ Saved user: Eshan Nahar
 CSV processing completed
 ```
 
-
 ### Tests (26/09)
 
 ```shell
@@ -37,3 +36,5 @@ Snapshots:   0 total
 Time:        4.886 s, estimated 5 s
 Ran all test suites.
 ```
+
+The package `mongodb-memory-server` is used for tests. If you don't get an `.exe` (I am on Windows) in `node_modules/cache` for them same then you can try in `beforeAll` in the tests above you can directly do `await mongoose.connect('mongodb://localhost:27017/test');`, assuming you ran `mongod` somewhere else before. This will work (I did get error for `.stop()` but not always)

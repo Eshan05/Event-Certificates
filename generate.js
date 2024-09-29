@@ -16,46 +16,56 @@ app.get('/try-pdf', (req, res) => {
 });
 
 app.post('/try-pdf', async (req, res) => {
-  const inputs = req.body.inputs;
-  const certificatePath = path.join(__dirname, "./Certificate_Templates/101_Certificate.pdf");
-  const existingPdfBytes = await fs.promises.readFile(certificatePath);
-  const pdfDoc = await PDFDocument.load(existingPdfBytes);
-  pdfDoc.registerFontkit(fontkit);
+  try {
+    const inputs = req.body.inputs;
+    const certificatePath = path.join(__dirname, "./Certificate_Templates/101_Certificate.pdf");
+    const existingPdfBytes = await fs.promises.readFile(certificatePath);
+    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    pdfDoc.registerFontkit(fontkit);
 
-  const page = pdfDoc.getPages()[0];
-  const { width, height } = page.getSize();
-  console.log("Page Dimensions (W:H)", parseFloat(width), parseFloat(height))
+    const page = pdfDoc.getPages()[0];
+    const { width, height } = page.getSize();
+    console.log("Page Dimensions (W:H)", parseFloat(width), parseFloat(height))
 
-  // Loop through the input
-  for (const input of inputs) {
-    const { value, fontFamily, fontSize, xCoord, yCoord } = input;
-    const fontPath = path.join(__dirname, 'fonts', `${fontFamily}.ttf`);
-    const fontBytes = await fs.promises.readFile(fontPath);
-    const customFont = await pdfDoc.embedFont(fontBytes);
-    if (xCoord > width) return res.status(404).send('X Coordinate out of bound')
-    if (yCoord > height) return res.status(404).send('Y Coordinate out of bound')
+    // Loop through the input
+    for (const input of inputs) {
+      const { value, fontFamily, fontSize, xCoord, yCoord } = input;
+      const fontPath = path.join(__dirname, 'fonts', `${fontFamily}.ttf`);
+      const fontBytes = await fs.promises.readFile(fontPath);
+      const customFont = await pdfDoc.embedFont(fontBytes);
+      if (xCoord > width) return res.status(404).send('X Coordinate out of bound')
+      if (yCoord > height) return res.status(404).send('Y Coordinate out of bound')
 
-    page.drawText(value, {
-      x: parseFloat(xCoord),
-      y: parseFloat(yCoord),
-      size: parseInt(fontSize),
-      font: customFont,
-    });
+      page.drawText(value, {
+        x: parseFloat(xCoord),
+        y: parseFloat(yCoord),
+        size: parseInt(fontSize),
+        font: customFont,
+      });
+    }
+
+    const pdfBytes = await pdfDoc.save();
+    lastPdf = pdfBytes; // Store PDF bytes in memory
+    const pdfUrl = '/view-pdf'; // Set URL to view PDF
+    res.render('try-pdf', { pdfUrl });
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+    res.status(500).send('Internal Server Error');
   }
-
-  const pdfBytes = await pdfDoc.save();
-  lastPdf = pdfBytes; // Store PDF bytes in memory
-  const pdfUrl = '/view-pdf'; // Set URL to view PDF
-  res.render('try-pdf', { pdfUrl });
 });
 
 app.get('/view-pdf', (req, res) => {
-  if (!lastPdf) return res.status(404).send('No PDF generated yet.');
+  try {
+    if (!lastPdf) return res.status(404).send('No PDF generated yet.');
 
-  // Set headers to display PDF in the browser
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'inline; filename="certificate.pdf"');
-  res.send(Buffer.from(lastPdf));
+    // Set headers to display PDF in the browser
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline; filename="certificate.pdf"');
+    res.send(Buffer.from(lastPdf));
+  } catch (error) {
+    console.error('Error serving PDF:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 const PORT = process.env.PORT || 3003;
