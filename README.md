@@ -10,11 +10,13 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - Tests written in **Jest** to streamline the process.
 - A minimal and responsive UI which can be easily modified as per liking. Uses **Tailwind CSS** and has dark mode.
 - Scalable for large datasets with good error handling and easy to modify.
+- Allows you to test out placement of text on any PDF via `try-pdf.ejs`. Includes setting font size and font family.
 
 ## In Future
 
-- ~~Make a more or less centralized CSV Processor~~
-- ~~Implement dark mode~~
+- [X] Make a more or less centralized CSV Processor
+- [X] Implement dark mode
+- [X] Make a new route for testing out text on PDF
 
 # Setup
 
@@ -25,6 +27,7 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 5. If it throws error then check firstly it says `Connected to MongoDB` in console, if not then connect to. (Usually by whitelisting your IP)
 6. Open `localhost:3000` and then try it out. On `/` you will see links to the other events.
 7. Deployable if you wish (Check `.github/`)
+8. If you wish to use `try-pdf.ejs` then run `node generate.js`
 
 ### Notes
 

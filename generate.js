@@ -11,11 +11,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 let lastPdf; // Variable to store the last generated PDF
 
-app.get('/generate-pdf', (req, res) => {
-  res.render('generate-pdf', { pdfUrl: null });
+app.get('/try-pdf', (req, res) => {
+  res.render('try-pdf', { pdfUrl: null });
 });
 
-app.post('/generate-pdf', async (req, res) => {
+app.post('/try-pdf', async (req, res) => {
   const inputs = req.body.inputs;
   const certificatePath = path.join(__dirname, "./Certificate_Templates/101_Certificate.pdf");
   const existingPdfBytes = await fs.promises.readFile(certificatePath);
@@ -24,7 +24,7 @@ app.post('/generate-pdf', async (req, res) => {
 
   const page = pdfDoc.getPages()[0];
   const { width, height } = page.getSize();
-  console.log(parseFloat(width), parseFloat(height))
+  console.log("Page Dimensions (W:H)", parseFloat(width), parseFloat(height))
 
   // Loop through the input
   for (const input of inputs) {
@@ -46,7 +46,7 @@ app.post('/generate-pdf', async (req, res) => {
   const pdfBytes = await pdfDoc.save();
   lastPdf = pdfBytes; // Store PDF bytes in memory
   const pdfUrl = '/view-pdf'; // Set URL to view PDF
-  res.render('generate-pdf', { pdfUrl });
+  res.render('try-pdf', { pdfUrl });
 });
 
 app.get('/view-pdf', (req, res) => {
@@ -58,9 +58,9 @@ app.get('/view-pdf', (req, res) => {
   res.send(Buffer.from(lastPdf));
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
-  console.log(`Server running on: http://localhost:${PORT}/generate-pdf`);
+  console.log(`Server running on: http://localhost:${PORT}/try-pdf`);
 });
 
 process.on("SIGINT", async () => {
