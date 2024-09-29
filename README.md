@@ -13,8 +13,8 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 
 ## In Future
 
-- ~~[X] Make a more or less centralized CSV Processor ~~
-- ~~[X] Implement dark mode~~
+- ~~Make a more or less centralized CSV Processor~~
+- ~~Implement dark mode~~
 
 # Setup
 
