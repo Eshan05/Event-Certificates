@@ -20,12 +20,10 @@
     class="flex flex-col justify-center dark:text-[#ceced2] items-center min-h-svh xl:text-[28px] lg:text-[26px] md:text-[22px] text-[18px] bg-[#eee] dark:bg-[#272727] relative">
     <main class="w-3/4 mx-6 2xl:w-1/2">
       <header class="flex flex-col items-center justify-center mb-6 ">
-        <h1 class="pt-4 pb-3 text-3xl font-bold xl:text-5xl md:text-4xl">
-          <a href="/">Try out Text</a>
-        </h1>
+        <h1 class="pt-4 pb-3 text-3xl font-bold xl:text-5xl md:text-4xl"> Try PDF </h1>
       </header>
       <hr class="border-neutral-300 block mb-8 lg:mx-16" />
-      <form action="/try-pdf" method="POST"
+      <form action="/try-pdf" method="POST" id="pdfForm"
         class="flex flex-col p-5 mt-8 rounded border-2 border-[#aaa4] bg-[#EBECF0] dark:bg-[#2D2D2D] items-center justify-center dark:text-[#ceced2]">
         <section id="input-fields" class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-x-16 items-center">
         </section>
@@ -40,8 +38,9 @@
             class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide small-caps">Generate
             PDF</button>
         </section>
-      </form> <!--noformat-->
+      </form>
     </main>
+    <div id="pdfViewerContainer" class="w-full"><!--noformat-->
     <% if (pdfUrl) { %>
       <section class="flex flex-col gap-y-6 justify-center mx-6 w-3/4 lg:w-full mt-16 rounded">
         <object data="<%= pdfUrl %>" type="application/pdf" class="h-[400px] w-full lg:w-1/2 mx-auto block rounded shadow-md">
@@ -50,27 +49,28 @@
       </section>
     <% } %>
     
-    <!--noformat--> <footer class="flex flex-row gap-x-4 items-center justify-center mt-auto pt-8 pb-2">
-        <button id="theme-toggle" class="aspect-square inline-block w-5 md:w-6 pt-px">
-          <svg class="dark:hidden" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path class="fill-black"
-              d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z" />
-            <path class="fill-black" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" />
-          </svg>
-          <svg class="hidden dark:block" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path class="fill-white"
-              d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z" />
-            <path class="fill-white"
-              d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z" />
-          </svg>
-        </button>
-        <p class="dark:text-white text-black"> &copy; 2024 Your Organization. All rights reserved. </p>
-      </footer>
-      <div id="toast-container" class="toast-container fixed bottom-4 right-4 text-sm"></div>
-      <!-- <aside id="links" class="absolute"></aside> -->
+    <!--noformat--> </div>
+    <footer class="flex flex-row gap-x-4 items-center justify-center mt-auto pt-8 pb-2">
+      <button id="theme-toggle" class="aspect-square inline-block w-5 md:w-6 pt-px">
+        <svg class="dark:hidden" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path class="fill-black"
+            d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z" />
+          <path class="fill-black" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" />
+        </svg>
+        <svg class="hidden dark:block" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path class="fill-white"
+            d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z" />
+          <path class="fill-white"
+            d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z" />
+        </svg>
+      </button>
+      <p class="dark:text-white text-black"> &copy; 2024 Your Organization. All rights reserved. </p>
+    </footer>
+    <div id="toast-container" class="toast-container fixed bottom-4 right-4 text-sm"></div>
+    <!-- <aside id="links" class="absolute"></aside> -->
   </body>
   <script>
-    let inputCount = 1;
+    let inputCount = 0;
 
     function addInputField() {
       const inputFieldsDiv = document.getElementById('input-fields');
@@ -116,5 +116,43 @@
     }
   </script>
   <script src="util.js"></script>
+  <script>
+    document.getElementById('pdfForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent default form submission
+      const formData = new FormData(this);
+      const inputs = Array.from(formData.entries()).reduce((acc, [key, value]) => {
+        const [prefix, index, prop] = key.split(/[\[\]]+/).filter(Boolean);
+        if (!acc[index]) acc[index] = {};
+        acc[index][prop] = value;
+        return acc;
+      }, []);
+
+      const filteredInputs = inputs.filter(input => input && Object.keys(input).length > 0);
+      try {
+        const response = await fetch('/try-pdf', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', },
+          body: JSON.stringify({ inputs: filteredInputs }),
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+        const result = await response.json(); // Expecting JSON response
+        const newPdfUrl = result.pdfUrl; // Extract the pdfUrl from the response
+        // console.log('PDF URL:', newPdfUrl); // Check the URL
+        showToast('success', 'Success!', 'PDF generated successfully');
+
+        document.querySelector('#pdfViewerContainer').innerHTML = `
+          <section class="flex flex-col gap-y-6 justify-center mx-6 w-3/4 lg:w-full mt-16 rounded">
+            <object data="${newPdfUrl}" type="application/pdf" class="h-[400px] w-full lg:w-1/2 mx-auto block rounded shadow-md">
+              <iframe src="${newPdfUrl}" class="w-full h-full"></iframe>
+            </object>
+          </section>
+        `;
+      } catch (error) {
+        console.error('Error:', error);
+        showToast('error', 'Error!', 'An error occurred: ' + error.message);
+      }
+    });
+  </script>
 
 </html>
