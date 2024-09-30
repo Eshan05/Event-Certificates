@@ -28,40 +28,28 @@
       <form action="/try-pdf" method="POST"
         class="flex flex-col p-5 mt-8 rounded border-2 border-[#aaa4] bg-[#EBECF0] dark:bg-[#2D2D2D] items-center justify-center dark:text-[#ceced2]">
         <section id="input-fields" class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-x-16 items-center">
-          <!-- <div class="input-group" class="flex flex-col gap-y-3">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="inputs[0][value]" required>
-            <label for="fontFamily">Font Family:</label>
-            <select name="inputs[0][fontFamily]" required class=" block bg-transparent dark:bg-[#2d2d2d]
-              outline-none border-none rounded-lg py-2 px-2 my-3 lg:text-[.75em] text-[.75em]">
-              <option value="Anastasia-Script">Anastasia-Script</option>
-              <option value="Graduate-Regular">Graduate-Regular</option>
-            </select>
-            <label for="fontSize">Font Size:</label>
-            <input type="number" name="inputs[0][fontSize]" value="20" required>
-          </div> -->
         </section>
         <section class="flex md:flex-row flex-col w-full justify-evenly items-center my-6 mx-2 p-1">
           <button type="button" onclick="addInputField()"
-            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide"
-            style="font-variant: small-caps">Add Another Input</button>
+            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide small-caps">Add
+            Another Input</button>
           <button type="button" onclick="removeInputField()"
-            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide"
-            style="font-variant: small-caps">Remove Last Input</button>
+            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide small-caps">Remove
+            Last Input</button>
           <button type="submit"
-            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide"
-            style="font-variant: small-caps">Generate PDF</button>
+            class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide small-caps">Generate
+            PDF</button>
         </section>
       </form> <!--noformat-->
     </main>
     <% if (pdfUrl) { %>
       <section class="flex flex-col gap-y-6 justify-center mx-6 w-3/4 lg:w-full mt-16 rounded">
-        <!-- <h2 class="text-center">Certificate</h2> -->
         <object data="<%= pdfUrl %>" type="application/pdf" class="h-[400px] w-full lg:w-1/2 mx-auto block rounded shadow-md">
           <iframe src="<%= pdfUrl %>" class="w-full h-full"></iframe> 
         </object>
       </section>
     <% } %>
+    
     <!--noformat--> <footer class="flex flex-row gap-x-4 items-center justify-center mt-auto pt-8 pb-2">
         <button id="theme-toggle" class="aspect-square inline-block w-5 md:w-6 pt-px">
           <svg class="dark:hidden" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -125,32 +113,6 @@
         inputCount--;
         showToast('success', 'Input Removed', "Successfully removed last input field.");
       }
-    }
-  </script>
-  <script>
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    function setTheme() {
-      const currentTheme = localStorage.getItem('theme');
-      if (currentTheme === 'dark') document.documentElement.classList.add('dark');
-      else document.documentElement.classList.remove('dark');
-    }
-
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
-      if (document.documentElement.classList.contains('dark')) {
-        localStorage.setItem('theme', 'dark');
-      } else {
-        localStorage.setItem('theme', 'light');
-      }
-    }
-
-    themeToggleBtn.addEventListener('click', toggleTheme);
-    setTheme();
-
-  </script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class', // or 'media' for automatic preference
     }
   </script>
   <script src="util.js"></script>
