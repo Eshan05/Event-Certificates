@@ -114,3 +114,17 @@ body {
   margin-bottom: .5rem;
   border-radius: .25rem;
 }
+
+b.numcircle {
+  border-radius: 0.25rem;
+  display: inline-block; 
+  text-align: center; 
+  font-size: 0.75rem; 
+  width: 1.25rem; 
+  height: 1.25rem; 
+  margin-right: 0.75rem;
+  position: relative;
+  line-height: 1.5; 
+  top: 1px; 
+  /*rounded inline-block text-center text-xs border w-5 h-5 mr-3 leading-normal relative top-px*/
+}

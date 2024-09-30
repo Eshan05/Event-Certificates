@@ -80,6 +80,17 @@ const GitHub_101_User = mongoose.model(
   "GitHub_101"
 );
 
+function sendResponse(res, message) {
+  res.send(`
+    <html>
+      <body>
+        <p>${message}</p>
+        <p>If you have any questions, visit <a href="/faqs">FAQs</a>.</p>
+      </body>
+    </html>
+  `);
+}
+
 app.get("/", (req, res) => { res.render("gateway"); });
 app.get("/faqs", (req, res) => { res.render("faqs"); });
 
@@ -109,7 +120,8 @@ app.post("/GitHub_101", async (req, res) => {
       user.LastAccessed = new Date();
       await user.save();
     } else {
-      res.send("Name Not Found!\nPlease enter your First & Last Name only.");
+      const message = "Name Not Found! Please enter your First & Last Name only.";
+      sendResponse(res, message);
     }
   } catch (err) {
     console.error("Error generating certificate:", err);
@@ -135,7 +147,8 @@ app.post("/Membership", async (req, res) => {
       user.LastAccessed = new Date();
       await user.save();
     } else {
-      res.send("Name and/or Academic Year is incorrect. Please double check.");
+      const message = "Name and/or Academic Year is incorrect. Please double check.";
+      sendResponse(res, message);
     }
   } catch (err) {
     console.error("Error generating certificate:", err);
