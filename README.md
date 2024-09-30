@@ -19,7 +19,10 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - [X] Implement dark mode
 - [X] Make a new route for testing out text on PDF
 - [ ] Better error handling for server actions (Possibly use toasts there too)
-- [ ] Write tests
+- [ ] Write more tests
+- [ ] Feedback system
+- [ ] FAQs and better error page
+- [ ] Loading indicator
 
 # Setup
 

@@ -7,3 +7,4 @@ package-lock.json
 # CSV_Handlers/csvProcessor.js
 # CSV_Handlers/membershipProcessor.js
 views/index.ejs
+.vscode/extensions.json
