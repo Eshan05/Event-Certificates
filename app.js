@@ -80,9 +80,8 @@ const GitHub_101_User = mongoose.model(
   "GitHub_101"
 );
 
-app.get("/", (req, res) => {
-  res.render("gateway");
-});
+app.get("/", (req, res) => { res.render("gateway"); });
+app.get("/faqs", (req, res) => { res.render("faqs"); });
 
 app.get("/Membership", (req, res) => {
   res.render("Membership");

@@ -48,19 +48,19 @@ h2 {
   border: none;
 }
 
-.dark button:not(#theme-toggle) {
+.dark button:not(#theme-toggle):not(.faqbtn) {
   background-color: #2d2d2d;
   border-radius: 8px;
   box-shadow: 6px 6px 8px #212121,
     -6px -6px 8px #393939;
 }
 
-.dark button:not(#theme-toggle):hover {
+.dark button:not(#theme-toggle):not(.faqbtn):hover {
   box-shadow: 4px 4px 6px #212121,
     -4px -4px 6px #393939;
 }
 
-.dark button:not(#theme-toggle):active {
+.dark button:not(#theme-toggle):not(.faqbtn):active {
   box-shadow:
     inset 2px 2px 6px rgba(0, 0, 0, 0.6),
     inset -2px -2px 6px rgba(255, 255, 255, 0.2);
@@ -85,18 +85,18 @@ input:focus {
   border: none;
 }
 
-button:not(#theme-toggle) {
+button:not(#theme-toggle):not(.faqbtn) {
   box-shadow: 3px 3px 5px #babecc, -4px -4px 10px #fff;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   pointer-events: all;
 }
 
-button:not(#theme-toggle):hover {
+button:not(#theme-toggle):not(.faqbtn):hover {
   box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
 }
 
-button:not(#theme-toggle):active {
+button:not(#theme-toggle):not(.faqbtn):active {
   box-shadow: inset 2px 2px 3px #babecc, inset -2px -2px 3px #fff;
 }
 

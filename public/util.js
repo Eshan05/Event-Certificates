@@ -41,6 +41,27 @@ function createToastContainer() {
   return container;
 }
 
+function createHeader(title, subtitle, imageUrl) {
+  return `
+      <div id="avatar">
+        <a href="https://aces-rmdssoe.tech">
+          <img src="${imageUrl}" alt="Logo" border="0" class="w-[3em] h-[3em] rounded-[50%] mt-4" loading="lazy" />
+        </a>
+      </div>
+      <h1 class="pt-4 pb-2 text-4xl font-bold lg:text-5xl 2xl:text-6xl">
+        <a href="/">${title}</a>
+      </h1>
+      <h2 class="text-2xl lg:text-3xl 2xl:text-4xl mb-2">${subtitle}</h2>
+      <section id="header-icons">
+        <a href="https://github.com/ACES-RMDSSOE" target="_blank" class="text-[1.25em] hover:text-[#6e5494]"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/company/aces-rmdssoe/" target="_blank" class="text-[1.25em] hover:text-[#0a66c2]"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/aces_rmdssoe" target="_blank" class="text-[1.25em] hover:text-[#c13584]"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://chat.whatsapp.com/JMnbIm2k3cXAuj9zt38Xbx" target="_blank" class="text-[1.25em] hover:text-[green]"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://aces-rmdssoe.tech" target="_blank" class="text-[1.25em] hover:text-[#444]"><i class="fa-solid fa-globe"></i></a>
+      </section>
+  `;
+}
+
 const themeToggleBtn = document.getElementById('theme-toggle');
 function setTheme() {
   const currentTheme = localStorage.getItem('theme');
