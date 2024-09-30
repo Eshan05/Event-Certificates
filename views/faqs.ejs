@@ -30,14 +30,13 @@
       <article class="container mx-auto px-4">
         <section class="grid gap-8 mx-auto w-full items-center text-sm md:text-md" x-data="{selected:0}">
           <!-- Column 1 -->
-          <ul class="flex flex-col gap-y-5">
+          <ul class="flex flex-col gap-y-5" id="listwrap">
             <li class="relative border rounded dark:border-zinc-600">
               <button type="button" class="w-full px-5 py-4 text-left faqbtn"
                 @click="selected !== 1 ? selected = 1 : selected = null">
                 <header class="flex items-center justify-between text-lg md:text-xl font-semibold">
-                  <b
-                    class="rounded-md inline-block text-center text-xs border w-5 h-5 mr-3 relative leading-normal top-px">1</b>
-                  <span class="pe-4"> I put in details but it says it's incorrect / not-found.</span>
+                  <b class="numcircle shadow bg-blue-500/40 border-sky-600/60 border">1</b>
+                  <span class="pe-4"> Details not being recognized.</span>
                   <svg :class="{'transform rotate-180' : selected == 1}" class="w-5 h-5 text-gray-500" fill="none"
                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -47,15 +46,19 @@
               </button>
               <section class="relative overflow-hidden transition-all max-h-0 duration-700" x-ref="container1"
                 x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
-                <div class="px-6 pb-6"> Hi </div>
+                <div class="px-6 pb-6"> Firstly, do make sure the details you have put have no typos. Even then if you
+                  are getting errors please ensure there are no extra whitespaces (Except at end which don't matter). If
+                  you have accounted for that as well then we may have not saved your details properly, in that case
+                  please contact us via any platform or <a href="mailto:">mail us</a>. We will resolve your issue ASAP.
+                </div>
               </section>
             </li>
             <li class="relative border rounded dark:border-zinc-600">
               <button type="button" class="w-full px-5 py-4 text-left faqbtn"
                 @click="selected !== 2 ? selected = 2 : selected = null">
                 <header class="flex items-center justify-between text-lg md:text-xl font-semibold">
-                  <b class="rounded-md inline-block text-center text-xs border w-5 h-5 mr-3 relative top-px">2</b>
-                  <span class="pe-4"> I am getting the error "Error generating certificate" </span>
+                  <b class="numcircle shadow bg-blue-500/40 border-sky-600/60 border">2</b>
+                  <span class="pe-4"> "Error generating certificate" </span>
                   <svg :class="{'transform rotate-180' : selected == 2}" class="w-5 h-5 text-gray-500 inline-block"
                     fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -65,7 +68,11 @@
               </button>
               <section class="relative overflow-hidden transition-all max-h-0 duration-700" x-ref="container2"
                 x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
-                <div class="px-6 pb-6"> Hi </div>
+                <div class="px-6 pb-6"> If you come across this error then it could mean a few things, all of which are
+                  related to us. This error arises primarily because of a server-side issue. Therefore, it could mean
+                  there is some WIP or some mishaps on our end. Regardless, feel free to try in sometime or reach out to
+                  us via any of the platforms or <a href="mailto:">mail us</a>. We will look into it and fix it ASAP.
+                </div>
               </section>
             </li>
           </ul>
@@ -92,7 +99,23 @@
   <script src="util.js"></script>
   <script>
     const headerHTML = createHeader("FAQs", "Got some questions?", "https://raw.githubusercontent.com/MadhurJ20/Invoice/master/assets/ACES_Logo.png");
-    document.getElementsByTagName('header')[0].innerHTML = headerHTML
+    document.getElementsByTagName('header')[0].innerHTML = headerHTML;
+
+    const searchInput = document.getElementById('search-input');
+    const links = document.getElementById('listwrap');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const items = links.getElementsByTagName('li');
+
+      for (let item of items) {
+        const textContent = item.textContent.toLowerCase();
+        if (textContent.includes(searchTerm)) {
+          item.style.display = ''; // Show item
+        } else {
+          item.style.display = 'none'; // Hide item
+        }
+      }
+    });
   </script>
 
 </html>
