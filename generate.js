@@ -6,6 +6,7 @@ const fontkit = require('@pdf-lib/fontkit');
 
 const app = express();
 app.set('view engine', 'ejs');
+app.use(express.json());
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
@@ -16,7 +17,10 @@ app.get('/try-pdf', (req, res) => {
 
 app.post('/try-pdf', async (req, res) => {
   try {
+    // console.log('Request Headers:', req.headers);
+    // console.log('Request Body:', req.body);
     const inputs = req.body.inputs;
+    // if (!inputs || inputs.length === 0) return res.status(400).send('No inputs provided');
     const certificatePath = path.join(__dirname, "./Certificate_Templates/101_Certificate.pdf");
     const existingPdfBytes = await fs.promises.readFile(certificatePath);
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
@@ -48,10 +52,10 @@ app.post('/try-pdf', async (req, res) => {
     await fs.promises.writeFile(tempPdfPath, pdfBytes);
 
     const pdfUrl = '/generated.pdf'; // Set URL to view the PDF
-    res.render('try-pdf', { pdfUrl });
+    res.json({ pdfUrl }); // Instead of res.render for the toasts 
   } catch (error) {
     console.error('Error generating PDF:', error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send('Internal Server Error' + error.message);
   }
 });
 
@@ -61,6 +65,9 @@ app.get('/generated.pdf', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3003;
-app.listen(PORT, () => {
-  console.log(`Server running on: http://localhost:${PORT}/try-pdf`);
+app.listen(PORT, () => { console.log(`Server running on: http://localhost:${PORT}/try-pdf`); });
+process.on("SIGINT", async () => { process.exit(0); });
+process.on("SIGTSTP", () => {
+  console.log("Received SIGTSTP (CTRL+Z). Triggering SIGINT.");
+  process.kill(process.pid, "SIGINT"); // Send SIGINT to self
 });
