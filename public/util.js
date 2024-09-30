@@ -40,3 +40,26 @@ function createToastContainer() {
   document.body.appendChild(container);
   return container;
 }
+
+const themeToggleBtn = document.getElementById('theme-toggle');
+function setTheme() {
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme === 'dark') document.documentElement.classList.add('dark');
+  else document.documentElement.classList.remove('dark');
+}
+
+function toggleTheme() {
+  document.documentElement.classList.toggle('dark');
+  if (document.documentElement.classList.contains('dark')) {
+    localStorage.setItem('theme', 'dark');
+  } else {
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+themeToggleBtn.addEventListener('click', toggleTheme);
+setTheme();
+
+tailwind.config = {
+  darkMode: 'class', // or 'media' for automatic preference
+}
