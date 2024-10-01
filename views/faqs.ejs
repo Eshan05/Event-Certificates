@@ -95,6 +95,10 @@
       </button>
       <p class="dark:text-white text-black"> &copy; 2024 Your Organization. All rights reserved. </p>
     </footer>
+    <div id="loaderwrap"
+      class="fixed h-lvh text-4xl w-full flex items-center justify-center z-50 inset-0 bg-[#eee] dark:bg-[#272727]">
+      <div class="loader"></div>
+    </div>
   </body>
   <script src="util.js"></script>
   <script>
@@ -115,6 +119,14 @@
           item.style.display = 'none'; // Hide item
         }
       }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const loaderWrap = document.getElementById('loaderwrap');
+      loaderWrap.style.display = 'flex';
+      setTimeout(() => {
+        loaderWrap.style.display = 'none';
+      }, 250);
     });
   </script>
 
