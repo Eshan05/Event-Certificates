@@ -12,6 +12,7 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - Scalable for large datasets with good error handling and easy to modify.
 - Allows you to test out placement of text on any PDF via `try-pdf.ejs`. Includes setting font size and font family.
 - Features a great, minimal and stacking toast functionality with various types as per requirements
+- A feedback optionality in the forms. A dedicated FAQs page and redirects in case of errors. Loading indicator during page load
 
 ## In Future
 
@@ -19,9 +20,10 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - [X] Implement dark mode
 - [X] Make a new route for testing out text on PDF
 - [ ] Write more tests
-- [ ] Feedback system
+- [X] Feedback system (Will expand on this)
 - [X] FAQs and better error page (Partially)
 - [X] Loading indicator
+- [ ] Add an analytics page based on feedback, can see event-wise
 
 # Setup
 
@@ -40,3 +42,10 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - I have put `generate.js` to run on separately from `app.js` with regards to production.
 - The basic idea is you have your events and workshops and what-not. The website helps you to give away certificates, you store the user data in CSV for people who attended them and upload it to MongoDB. The user has to visit the website and go to the respective event page then they put in their name and other details and simply get the certificate. The PDF generates in real time, not need to generate them beforehand (You will have to provide template in `Certificate_Templates` and CSV files goes in `CSV_Handlers`) 
 <!-- - This is not a CMS, you have to code in your own pages for each event and all other things.  -->
+
+## More Images
+
+![Main](./public/images/darkmobile_main.png "Main")
+![Main](./public/images/feedback_dark.png "Main")
+![Main](./public/images/faqsmobile_dark.png "Main")
+![Main](./public/images/trypdf_dark.png "Main")
