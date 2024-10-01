@@ -45,6 +45,7 @@ const GitHubUserSchema = new mongoose.Schema({
   Name: { type: String, required: true },
   Class: { type: String, enum: ["BE", "TE", "SE"], required: true },
   LastAccessed: { type: Date, default: null },
+  Feedback: { type: String, default: null },
 });
 
 const MembershipUserSchema = new mongoose.Schema({
@@ -104,6 +105,7 @@ app.get("/GitHub_101", (req, res) => {
 
 app.post("/GitHub_101", async (req, res) => {
   const userName = req.body.name.trim();
+  const feedback = req.body.feedback ? req.body.feedback.trim() : null;
   try {
     const user = await GitHub_101_User.findOne({ Name: userName });
     if (user) {
@@ -118,6 +120,7 @@ app.post("/GitHub_101", async (req, res) => {
       res.setHeader("Content-Type", "application/pdf");
       res.send(Buffer.from(pdfBytes)); // Send the PDF as a buffer
       user.LastAccessed = new Date();
+      if (feedback) user.Feedback = feedback;
       await user.save();
     } else {
       const message = "Name Not Found! Please enter your First & Last Name only.";

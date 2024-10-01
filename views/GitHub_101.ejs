@@ -25,15 +25,21 @@
           class="bg-[#eee] dark:bg-[#22232a] px-2">FAQs</span></a>
       <hr class="border-neutral-500 dark:border-neutral-300 block mb-8 lg:mx-16" />
       <form action="/GitHub_101" method="POST"
-        class="flex flex-col p-5 mt-8 rounded border-2 border-[#aaa4] bg-[#EBECF0] dark:bg-[#2D2D2D] w-[12.5em] lg:w-[17.5em] items-center justify-center ">
+        class="flex flex-col p-5 mt-8 rounded border-2 border-[#aaa4] bg-[#EBECF0] dark:bg-[#2D2D2D] w-[12.5em] lg:w-[17.5em] items-center justify-center relative">
         <label for="name" class="text-center color-[#61677C] tracking-wide text-[.75em]"
           style="font-variant: small-caps">Enter Your Name</label>
         <input type="text" id="name" name="name"
           class="block bg-transparent dark:bg-[#2D2D2D] outline-none border-none rounded-lg py-2 px-3 my-3 lg:text-[.75em] text-[.75em]"
           placeholder="e.g. Harry Potter" />
         <button type="submit" onclick="submitInput()"
-          class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded mt-4 outline-none flex tracking-wide"
-          style="font-variant: small-caps"> Submit </button>
+          class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded my-4 outline-none flex tracking-wide small-caps">
+          Submit </button>
+        <label for="feedback" class="text-center color-[#61677C] tracking-wide text-[.75em] small-caps">Feedback
+          (Optional) </label>
+        <textarea id="feedback" name="feedback" maxlength="128"
+          class="block bg-transparent dark:bg-[#2D2D2D] outline-none border-none rounded-lg py-2 px-3 my-3 lg:text-[.75em] text-[.75em]"
+          placeholder="Your feedback here..."></textarea>
+        <span id="charCount" class="text-sm absolute bottom-10 right-8">0 / 128</span>
       </form>
     </main>
     <section
@@ -69,6 +75,14 @@
         showToast('success', 'PDF Generated!', `Make sure to check your details in it.<br /> If you face any issues contact us or <a href="/">mail</a>`)
       }, "750")
     }
+
+    const feedbackInput = document.getElementById('feedback');
+    const charCount = document.getElementById('charCount');
+
+    feedbackInput.addEventListener('input', function () {
+      const currentLength = feedbackInput.value.length;
+      charCount.textContent = `${currentLength} / 128`;
+    });
   </script>
 
 </html>
