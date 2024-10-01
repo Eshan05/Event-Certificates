@@ -18,16 +18,15 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - [X] Make a more or less centralized CSV Processor
 - [X] Implement dark mode
 - [X] Make a new route for testing out text on PDF
-- [ ] Better error handling for server actions (Possibly use toasts there too)
 - [ ] Write more tests
 - [ ] Feedback system
-- [ ] FAQs and better error page
-- [ ] Loading indicator
+- [X] FAQs and better error page (Partially)
+- [X] Loading indicator
 
 # Setup
 
 1. Firstly make a MongoDB Atlas account and connect to it. (Preferably by VSCode Extension)
-2. Put your connection string in `.env` file.
+2. Put your connection string in `.env.local` file.
 3. Install necessary packages via `npm i`.
 4. Test out the existing events by uploading `node ...js` (For using `csvProcessor` make proper file like `membershipProcessor`) which will upload the data into your MongoDB collections. Then run `nodemon app.js` to start the app.
 5. If it throws error then check firstly it says `Connected to MongoDB` in console, if not then connect to. (Usually by whitelisting your IP)
@@ -39,3 +38,5 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 
 - See LICENSE.
 - I have put `generate.js` to run on separately from `app.js` with regards to production.
+- The basic idea is you have your events and workshops and what-not. The website helps you to give away certificates, you store the user data in CSV for people who attended them and upload it to MongoDB. The user has to visit the website and go to the respective event page then they put in their name and other details and simply get the certificate. The PDF generates in real time, not need to generate them beforehand (You will have to provide template in `Certificate_Templates` and CSV files goes in `CSV_Handlers`) 
+<!-- - This is not a CMS, you have to code in your own pages for each event and all other things.  -->
