@@ -114,11 +114,11 @@ app.post("/verify", async (req, res) => {
       EventName = "Membership";
     }
 
-    if (user) res.render("verify", { user, EventName, showForm: true, error: null });
-    else res.render("verify", { user: null, EventName, showForm: true, error: "Certificate ID Not Found!" });
+    if (user) res.render("verify", { user, EventName, showForm: true, error: null, success: true, });
+    else res.render("verify", { user: null, EventName, showForm: true, error: "Certificate ID Not Found!", success: false, });
   } catch (error) {
     console.log(error);
-    res.render("verify", { user: null, showForm: true, error: "An error occurred!" });
+    res.render("verify", { user: null, showForm: true, error: "An error occurred!", success: false });
   }
 });
 

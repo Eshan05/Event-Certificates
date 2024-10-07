@@ -27,7 +27,18 @@
       <hr class="border-neutral-300 block mb-8 lg:mx-16" />
       <section><!--noformat-->
         <% if (error) { %>
-          <div class="error"><%= error %></div>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              showToast('error', 'Error!', 'An error occurred: <%= error %>');
+            });
+          </script>
+        <% } %>
+        <% if (success) { %>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              showToast('success', 'Success!', 'User returned successfully: <%= user.Name %>');
+            });
+          </script>
         <% } %>
         <% if (showForm) { %>
         <form action="/verify" method="POST"
@@ -50,7 +61,7 @@
           </article>
         <% } else { %>
           <h2 class="mt-6 ml-3 text-[1em]">Event: <%= EventName %></h2>
-          No information available
+          <p class="ml-3 text-[.75em]"> No information available </p>
         <% } %>
         <!-- noformat -->
       </section>
@@ -71,6 +82,7 @@
       </button>
       <p class="dark:text-white text-black"> &copy; 2024 Your Organization. All rights reserved. </p>
     </footer>
+    <div id="toast-container" class="toast-container fixed bottom-4 right-4 text-sm"></div>
   </body>
   <script src="util.js"></script>
   <script>
