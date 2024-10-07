@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate | Your Organization</title>
+    <link rel="icon" type="image/x-icon"
+      href="https://raw.githubusercontent.com/ACES-RMDSSOE/Website/main/images/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com" rel="preload"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="template.css" />
+    <link rel="stylesheet" href="gateway.css" />
+  </head>
+
+  <body
+    class="flex flex-col justify-center dark:text-[#ceced2] items-center min-h-svh xl:text-[28px] lg:text-[26px] md:text-[22px] text-[18px] bg-[#eee] dark:bg-[#272727] relative">
+    <main class="md:w-1/2 lg:w-1/3 2xl:w-1/4 relative">
+      <h1>Admin Dashboard</h1>
+
+    <h2>Membership Event Statistics</h2>
+    <p>Total Members: <%= totalMembershipUsers %></p>
+    <p>Members Who Received Certificates: <%= membersWithCertificates %></p>
+
+    <h3>Recent Certificate Getters</h3>
+    <ul>
+      <% recentMembershipGetters.forEach(user => { %>
+        <li>
+          <strong>Name:</strong> <%= user.Name %> - 
+          <strong>Last Accessed:</strong> <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %>
+        </li>
+      <% }); %>
+    </ul>
+
+    <h2>GitHub 101 Event Statistics</h2>
+    <p>Total Users: <%= totalGitHubUsers %></p>
+    <p>Users Who Received Certificates: <%= githubUsersWithCertificates %></p>
+
+    <h3>Recent Certificate Getters</h3>
+    <ul>
+      <% recentGitHubGetters.forEach(user => { %>
+        <li>
+          <strong>Name:</strong> <%= user.Name %> - 
+          <strong>Last Accessed:</strong> <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %>
+        </li>
+      <% }); %>
+    </ul>
+    </main>
+  </body>
+
+</html>
