@@ -75,6 +75,27 @@
                 </div>
               </section>
             </li>
+            <li class="relative border rounded dark:border-zinc-600">
+              <button type="button" class="w-full px-5 py-4 text-left faqbtn"
+                @click="selected !== 3 ? selected = 3 : selected = null">
+                <header class="flex items-center justify-between text-lg md:text-xl font-semibold">
+                  <b class="numcircle shadow bg-blue-500/40 border-sky-600/60 border">3</b>
+                  <span class="pe-4"> Where do I verify certificates? </span>
+                  <svg :class="{'transform rotate-180' : selected == 3}" class="w-5 h-5 text-gray-500 inline-block"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </header>
+              </button>
+              <section class="relative overflow-hidden transition-all max-h-0 duration-700" x-ref="container2"
+                x-bind:style="selected == 3 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
+                <div class="px-6 pb-6">If you wish to verify any certificates you first need to have the certificate ID,
+                  this ID is crucial to verify the certificate. If you have the ID then please visit the <a
+                    href="/verify" class="text-blue-600 dark:text-blue-400 underline">verification page</a> to verify
+                  yours or any others certificate.</div>
+              </section>
+            </li>
           </ul>
         </section>
       </article>

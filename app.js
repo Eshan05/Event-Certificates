@@ -95,12 +95,31 @@ function sendResponse(res, message) {
 app.get("/", (req, res) => { res.render("gateway"); });
 app.get("/faqs", (req, res) => { res.render("faqs"); });
 
-app.get("/Membership", (req, res) => {
-  res.render("Membership");
-});
+app.get("/Membership", (req, res) => { res.render("Membership"); });
+app.get("/GitHub_101", (req, res) => { res.render("GitHub_101"); });
 
-app.get("/GitHub_101", (req, res) => {
-  res.render("GitHub_101");
+app.get("/verify", (req, res) => {
+  res.render("verify", { user: null, showForm: true, error: null });
+});
+app.post("/verify", async (req, res) => {
+  const cert = req.body.id.trim();
+  try {
+    let user = null;
+    let EventName = null;
+    if (cert.includes("GIT")) {
+      user = await GitHub_101_User.findOne({ CertID: cert });
+      EventName = "GitHub 101";
+    } else if (cert.includes("MEM")) {
+      user = await MembershipUser.findOne({ CertID: cert });
+      EventName = "Membership";
+    }
+
+    if (user) res.render("verify", { user, EventName, showForm: true, error: null });
+    else res.render("verify", { user: null, EventName, showForm: true, error: "Certificate ID Not Found!" });
+  } catch (error) {
+    console.log(error);
+    res.render("verify", { user: null, showForm: true, error: "An error occurred!" });
+  }
 });
 
 app.post("/GitHub_101", async (req, res) => {

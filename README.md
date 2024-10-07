@@ -25,7 +25,7 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - [X] Loading indicator
 - [ ] Add an analytics page based on feedback, can see event-wise
 
-# Setup
+## Setup
 
 1. Firstly make a MongoDB Atlas account and connect to it. (Preferably by VSCode Extension)
 2. Put your connection string in `.env.local` file.
@@ -36,14 +36,14 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 7. Deployable if you wish. (Check `.github/`)
 8. If you wish to use `try-pdf.ejs` then run `node generate.js`.
 
-### Notes
+## Notes
 
 - See LICENSE.
 - I have put `generate.js` to run on separately from `app.js` with regards to production.
 - The basic idea is you have your events and workshops and what-not. The website helps you to give away certificates, you store the user data in CSV for people who attended them and upload it to MongoDB. The user has to visit the website and go to the respective event page then they put in their name and other details and simply get the certificate. The PDF generates in real time, not need to generate them beforehand (You will have to provide template in `Certificate_Templates` and CSV files goes in `CSV_Handlers`) 
 <!-- - This is not a CMS, you have to code in your own pages for each event and all other things.  -->
 
-## More Images
+### More Images
 
 ![Main](./public/images/darkmobile_main.png "Main")
 ![Main](./public/images/feedback_dark.png "Main")
