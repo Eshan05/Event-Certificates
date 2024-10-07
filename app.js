@@ -94,13 +94,11 @@ function sendResponse(res, message) {
 
 app.get("/", (req, res) => { res.render("gateway"); });
 app.get("/faqs", (req, res) => { res.render("faqs"); });
+app.get("/verify", (req, res) => { res.render("verify", { user: null, showForm: true, error: null }); });
 
 app.get("/Membership", (req, res) => { res.render("Membership"); });
 app.get("/GitHub_101", (req, res) => { res.render("GitHub_101"); });
 
-app.get("/verify", (req, res) => {
-  res.render("verify", { user: null, showForm: true, error: null });
-});
 app.post("/verify", async (req, res) => {
   const cert = req.body.id.trim();
   try {
@@ -203,8 +201,11 @@ async function generatePdfWithName_GitHub_101(certID, name) {
       font: IDFont,
       color: rgb(0, 0, 0),
     });
+
+    const nameTextWidth = NameFont.widthOfTextAtSize(name, 30);
+    const nameX = (width - nameTextWidth) / 2;
     page.drawText(name, {
-      x: 270,
+      x: nameX,
       y: height - 260,
       size: 30,
       font: NameFont,
@@ -279,8 +280,11 @@ async function generatePdfWithName_Membership(user) {
       font: IDFont,
       color: rgb(0, 0, 0),
     });
+
+    const nameTextWidth = NameFont.widthOfTextAtSize(name, 30);
+    const nameX = (width - nameTextWidth) / 2;
     page.drawText(Name, {
-      x: 270,
+      x: nameX,
       y: height - 260,
       size: 30,
       font: NameFont,

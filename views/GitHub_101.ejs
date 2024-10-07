@@ -31,7 +31,7 @@
         <input type="text" id="name" name="name"
           class="block bg-transparent dark:bg-[#2D2D2D] outline-none border-none rounded-lg py-2 px-3 my-3 lg:text-[.75em] text-[.75em]"
           placeholder="e.g. Harry Potter" />
-        <button type="submit" onclick="submitInput()"
+        <button type="submit"
           class="bg-transparent text-[#61677C] dark:text-[#ceced2] hover:dark:text-white text-base xl:text-lg border-none font-extrabold px-4 py-2 rounded my-4 outline-none flex tracking-wide small-caps">
           Submit </button>
         <label for="feedback" class="text-center color-[#61677C] tracking-wide text-[.75em] small-caps">Feedback
@@ -69,12 +69,6 @@
   <script>
     const headerHTML = createHeader("Certificate", "Github 101", "images/ACES_Logo.png");
     document.getElementsByTagName('header')[0].innerHTML = headerHTML
-
-    function submitInput() {
-      setTimeout(() => {
-        showToast('success', 'PDF Generated!', `Make sure to check your details in it.<br /> If you face any issues contact us or <a href="/">mail</a>`)
-      }, "750")
-    }
 
     const feedbackInput = document.getElementById('feedback');
     const charCount = document.getElementById('charCount');
