@@ -4,26 +4,25 @@
 
 A certificate website with ability to hand out multiple certificate in PDF Format for various events. It has a nice, minimal and interactive UI which is responsive for small as well as large screens. Built using Node/Express and MongoDB it allows for multiple template, multiple schemas/models and a central CSV processor alongside indiviual ones. At a glance the app consists of
 
-- **Node/Express** Backend with main entry via `app.js` into `gateway.ejs`.
-- Specific datasets in `Datasets/` which are uploaded via files in `CSV_Handlers`. Includes a centralized CSV Processor.
-- Many templates which are programatically written to via **`pdflib`** allowing for OpenType fonts and high customization.
-- Tests written in **Jest** to streamline the process.
-- A minimal and responsive UI which can be easily modified as per liking. Uses **Tailwind CSS** and has dark mode.
-- Scalable for large datasets with good error handling and easy to modify.
-- Allows you to test out placement of text on any PDF via `try-pdf.ejs`. Includes setting font size and font family.
-- Features a great, minimal and stacking toast functionality with various types as per requirements
-- A feedback optionality in the forms. A dedicated FAQs page and redirects in case of errors. Loading indicator during page load
+- **🌐 Node/Express Backend**: with main entry via `app.js` into `gateway.ejs`.
+- **📊 CSV Exports**: Specific datasets in `Datasets/` which are uploaded via files in `CSV_Handlers`. Includes a centralized CSV Processor.
+- **🖼️ Dynamic PDF Generation**: Many templates which are programatically written to via **`pdflib`** allowing for OpenType fonts and high customization.
+- **✅ Proper Tests**: Tests written in **Jest** to streamline the process.
+- **🎨 UI/UX**: A minimal and responsive UI which can be easily modified as per liking. Uses **Tailwind CSS** and has dark mode.
+- **📈 Scalability**: Scalable for large datasets with good error handling and easy to modify.
+- **🔍 PDF Layout Testing**: Allows you to test out placement of text on any PDF via `try-pdf.ejs`. Includes setting font size and font family.
+- **🔔 Toasts**: Features a great, minimal and stacking toast functionality with various types as per requirements
+- **📝 Feedback & FAQs**: A feedback optionality in the forms. A dedicated FAQs page and redirects in case of errors. Loading indicator during page load
+- **📋 Admin Dashboard**: An admin dashboard with **pagination** and **sentiment analysis**. Shows total number of users attended, number of users who got their certificates and most recent certificate receivers. 
 
 ## In Future
 
-- [X] Make a more or less centralized CSV Processor
-- [X] Implement dark mode
-- [X] Make a new route for testing out text on PDF
 - [ ] Write more tests
 - [X] Feedback system (Will expand on this)
 - [X] FAQs and better error page (Partially)
 - [X] Loading indicator
-- [ ] Add an analytics page based on feedback, can see event-wise
+- [X] Add an analytics page based on feedback, can see event-wise
+- [ ] Maybe add charts to above
 
 ## Setup
 
@@ -35,6 +34,7 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 6. Open `localhost:3000` and then try it out. On `/` you will see links to the other events.
 7. Deployable if you wish. (Check `.github/`)
 8. If you wish to use `try-pdf.ejs` then run `node generate.js`.
+9. To see admin dashboard run `admin.js`
 
 ## Notes
 
@@ -49,3 +49,10 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 ![Main](./public/images/feedback_dark.png "Main")
 ![Main](./public/images/faqsmobile_dark.png "Main")
 ![Main](./public/images/trypdf_dark.png "Main")
+![Main](./public/images/dashboard_dark.png "Main")
+![Main](./public/images/dashboardmobile_light.png "Main")
+
+---
+
+Feel free to explore, raise issues for bugs or more features. 
+If possible give credits (:
