@@ -110,3 +110,6 @@ ul[class="cardlink"] {
     font-weight: 600;
   }
 }
+
+span:has(.fa-frown) { color: #d00; }
+span:has(.fa-smile) { color: #00a000; }

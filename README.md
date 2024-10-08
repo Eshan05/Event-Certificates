@@ -13,7 +13,7 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - **🔍 PDF Layout Testing**: Allows you to test out placement of text on any PDF via `try-pdf.ejs`. Includes setting font size and font family.
 - **🔔 Toasts**: Features a great, minimal and stacking toast functionality with various types as per requirements
 - **📝 Feedback & FAQs**: A feedback optionality in the forms. A dedicated FAQs page and redirects in case of errors. Loading indicator during page load
-- **📋 Admin Dashboard**: An admin dashboard with **pagination** and **sentiment analysis**. Shows total number of users attended, number of users who got their certificates and most recent certificate receivers. 
+- **📋 Admin Dashboard**: An admin dashboard with **pagination** and **sentiment analysis**. Shows total number of users attended, number of users who got their certificates and most recent certificate receivers. Also uses `chartjs`.
 
 ## In Future
 

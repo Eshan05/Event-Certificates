@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon"
       href="https://raw.githubusercontent.com/ACES-RMDSSOE/Website/main/images/favicon.ico" />
     <script src="https://cdn.tailwindcss.com" rel="preload"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -78,8 +79,11 @@
                 <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %> </span>
               <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-comments w-4 aspect-square"></i>
                 <%= user.Feedback %> </span>
-              <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-smile w-4 aspect-square"></i>
-                Sentiment: <%= user.sentimentClass %> </span>
+              <span class="flex items-center text-base gap-x-3">
+                <i class="fa-regular w-4 aspect-square 
+                      <%= user.sentimentClass === 'Positive' ? 'fa-smile' : 
+                         user.sentimentClass === 'Negative' ? 'fa-frown' : 'fa-meh' %>"></i> Sentiment: <span
+                  class="small-caps"> <%= user.sentimentScore %></span> </span>
             </li> <% }); %>
           </ul><!--noformat-->
           <div class="pagination"> 
@@ -100,6 +104,9 @@
             </div><!--noformat-->
         </article>
       </section>
+      <section class="lg:w-1/2 mx-auto flex flex-col lg:flex-row">
+        <canvas id="myPieChart" width="400" height="400"></canvas>
+      </section>
     </main>
     <footer class="flex flex-row gap-x-4 items-center justify-center mt-auto pt-8 pb-2">
       <button id="theme-toggle" class="aspect-square inline-block w-5 md:w-6 pt-px">
@@ -119,5 +126,42 @@
     </footer>
   </body>
   <script src="util.js"></script>
+  <script>
+    const ctx = document.getElementById('myPieChart').getContext('2d');
+    const data = {
+      labels: ['GitHub Certificates', 'Membership Certificates'],
+      datasets: [{
+        label: 'Certificates Given Out',
+        data: [<%= githubUsersWithCertificates %>, <%= membersWithCertificates %>],
+        backgroundColor: [
+          '#50e991aa',
+          '#009fffaa'
+        ],
+        borderColor: [
+          '#aaa',
+          '#aaa'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    const myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Certificates Given Out per Event'
+          }
+        }
+      },
+    });
+  </script>
 
 </html>
