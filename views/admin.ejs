@@ -43,17 +43,25 @@
             <% }); %>
       <!--noformat--> </ul>
         </article>
-        <article class="border dark:border-[#444] border-[#bbb] p-4 rounded">
-          <h2 class="small-caps border-b">GitHub 101</h2>
-          <aside class="flex w-full justify-evenly my-2">
-            <p class="text-[.75em]"><span class="">Total:</span> <%= totalGitHubUsers %></p>
-            <p class="text-[.75em]"><span>Obtained:</span> <%= githubUsersWithCertificates %></p>
-          </aside>
-          <h3>Recent GitHub Certificate Getters</h3>
-          <ul> <% recentGitHubGetters.forEach(user => { %> <li>
-              <strong>Name:</strong> <%= user.Name %> - <strong>Last Accessed:</strong>
-              <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %>
-            </li> <% }); %> </ul>
+        <article class="border dark:border-[#444] border-[#bbb]">
+          <header class="cardlink">
+            <h2 class="small-caps">GitHub 101</h2>
+            <aside class="">
+              <p class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-blue-400/60 drop-shadow rounded-xl">
+                <%= totalGitHubUsers %> </span>
+              </p>
+              <p class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-green-400/60 drop-shadow rounded-xl">
+                <%= githubUsersWithCertificates %> </p>
+            </aside>
+          </header>
+          <ul class="cardlink">
+            <h3 class="mb-4">Recent Certificates</h3> <% recentGitHubGetters.forEach(user => { %> <li>
+              <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-user w-4 aspect-square"></i>
+                <%= user.Name %> </span>
+              <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-clock w-4 aspect-square"></i>
+                <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %> </span>
+            </li> <% }); %>
+          </ul>
           <div class="pagination"> <% if (currentPageGitHub > 1) { %> <a
               href="/admin?pageGitHub=<%= currentPageGitHub - 1 %>&limit=<%= limit %>">Previous</a> <% } %>
             <% for (let i = 1; i <= totalPagesGitHub; i++) { %> <% if (i === currentPageGitHub) { %>
