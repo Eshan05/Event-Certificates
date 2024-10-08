@@ -41,7 +41,23 @@
                 <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-clock w-4 aspect-square"></i> <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %> </span>
               </li>
             <% }); %>
-      <!--noformat--> </ul>
+      <!--noformat--> </ul> <!--noformat-->
+          <div class="pagination"> 
+            <% if (currentPageMembership > 1) { %> 
+              <a class="bg-[#cecece] dark:bg-[#373737]"
+              href="/admin?pageMembership=<%= currentPageMembership - 1 %>&limit=<%= limit %>">◀</a> 
+            <% } %>
+            <% for (let i = 1; i <= totalPagesMembership; i++) { %>
+              <% if (i === currentPageMembership) { %> 
+                <strong class="bg-blue-600/40 dark:bg-blue-500/40"><%= i %></strong> 
+                <% } else { %> 
+                  <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageMembership=<%= i %>&limit=<%= limit %>"><%= i %></a>
+                <% } %> 
+              <% } %> 
+              <% if (currentPageMembership < totalPagesMembership) { %> 
+                <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageMembership=<%= currentPageMembership + 1 %>&limit=<%= limit %>">▶</a> 
+              <% } %> 
+            </div><!--noformat-->
         </article>
         <article class="border dark:border-[#444] border-[#bbb]">
           <header class="cardlink">
@@ -61,14 +77,23 @@
               <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-clock w-4 aspect-square"></i>
                 <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %> </span>
             </li> <% }); %>
-          </ul>
-          <div class="pagination"> <% if (currentPageGitHub > 1) { %> <a
-              href="/admin?pageGitHub=<%= currentPageGitHub - 1 %>&limit=<%= limit %>">Previous</a> <% } %>
-            <% for (let i = 1; i <= totalPagesGitHub; i++) { %> <% if (i === currentPageGitHub) { %>
-            <strong><%= i %></strong> <% } else { %> <a
-              href="/admin?pageGitHub=<%= i %>&limit=<%= limit %>"><%= i %></a> <% } %> <% } %>
-            <% if (currentPageGitHub < totalPagesGitHub) { %> <a
-              href="/admin?pageGitHub=<%= currentPageGitHub + 1 %>&limit=<%= limit %>">Next</a> <% } %> </div>
+          </ul><!--noformat-->
+          <div class="pagination"> 
+            <% if (currentPageGitHub > 1) { %> 
+              <a class="bg-[#cecece] dark:bg-[#373737]"
+              href="/admin?pageGitHub=<%= currentPageGitHub - 1 %>&limit=<%= limit %>">◀</a> 
+            <% } %>
+            <% for (let i = 1; i <= totalPagesGitHub; i++) { %>
+              <% if (i === currentPageGitHub) { %> 
+                <strong class="bg-blue-600/40 dark:bg-blue-500/40"><%= i %></strong> 
+                <% } else { %> 
+                  <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= i %>&limit=<%= limit %>"><%= i %></a>
+                <% } %> 
+              <% } %> 
+              <% if (currentPageGitHub < totalPagesGitHub) { %> 
+                <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= currentPageGitHub + 1 %>&limit=<%= limit %>">▶</a> 
+              <% } %> 
+            </div><!--noformat-->
         </article>
       </section>
     </main>

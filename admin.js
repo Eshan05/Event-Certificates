@@ -77,7 +77,7 @@ const GitHub_101_User = mongoose.model(
 app.get('/admin', async (req, res) => {
   const pageMembership = parseInt(req.query.pageMembership) || 1; // Membership pagination
   const pageGitHub = parseInt(req.query.pageGitHub) || 1; // GitHub pagination
-  const limit = parseInt(req.query.limit) || 1;
+  const limit = parseInt(req.query.limit) || 2;
 
   try {
     const totalMembershipUsers = await MembershipUser.countDocuments();
