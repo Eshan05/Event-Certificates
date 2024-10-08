@@ -8,6 +8,7 @@ dotenv.config();
 const path = require("path");
 const { cursorTo } = require("readline");
 const router = express.Router();
+const Sentiment = require("sentiment");
 
 
 const uri = process.env.ATLAS_URI;
@@ -29,6 +30,7 @@ async function connectToDatabase() {
 connectToDatabase();
 
 const app = express();
+const sentiment = new Sentiment();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -94,11 +96,20 @@ app.get('/admin', async (req, res) => {
       .skip((pageGitHub - 1) * limit)
       .limit(limit);
 
+    const enrichedGitHubGetters = recentGitHubGetters.map(user => {
+      const analysis = user.Feedback ? sentiment.analyze(user.Feedback) : { score: 0 };
+      return {
+        ...user.toObject(), // Convert Mongoose document to plain object
+        sentimentScore: analysis.score,
+        sentimentClass: classifySentiment(analysis)
+      };
+    });
+
     res.render('admin', {
       recentMembershipGetters,
       membersWithCertificates: await MembershipUser.countDocuments({ LastAccessed: { $exists: true } }),
       totalMembershipUsers,
-      recentGitHubGetters,
+      recentGitHubGetters: enrichedGitHubGetters,
       githubUsersWithCertificates: await GitHub_101_User.countDocuments({ LastAccessed: { $exists: true } }),
       totalGitHubUsers,
       currentPageMembership: pageMembership,
@@ -112,6 +123,13 @@ app.get('/admin', async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+const classifySentiment = (analysis) => {
+  const score = analysis.score;
+  if (score > 0) return 'Positive';
+  else if (score < 0) return 'Negative';
+  else return 'Neutral';
+};
 
 
 const PORT = process.env.PORT || 3001;

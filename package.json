@@ -27,7 +27,8 @@
     "express": "^4.21.0",
     "express-rate-limit": "^7.4.0",
     "fontkit": "^2.0.4",
-    "pdf-lib": "^1.17.1"
+    "pdf-lib": "^1.17.1",
+    "sentiment": "^5.0.2"
   },
   "devDependencies": {
     "jest": "^29.7.0",

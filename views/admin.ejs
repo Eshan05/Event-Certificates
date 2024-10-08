@@ -76,6 +76,10 @@
                 <%= user.Name %> </span>
               <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-clock w-4 aspect-square"></i>
                 <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %> </span>
+              <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-comments w-4 aspect-square"></i>
+                <%= user.Feedback %> </span>
+              <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-smile w-4 aspect-square"></i>
+                Sentiment: <%= user.sentimentClass %> </span>
             </li> <% }); %>
           </ul><!--noformat-->
           <div class="pagination"> 
