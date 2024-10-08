@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: ".env.local" });
 dotenv.config();
 const path = require("path");
+const { cursorTo } = require("readline");
 const router = express.Router();
 
 
@@ -74,37 +75,50 @@ const GitHub_101_User = mongoose.model(
 );
 
 app.get('/admin', async (req, res) => {
+  const pageMembership = parseInt(req.query.pageMembership) || 1; // Membership pagination
+  const pageGitHub = parseInt(req.query.pageGitHub) || 1; // GitHub pagination
+  const limit = parseInt(req.query.limit) || 1;
+
   try {
+    const totalMembershipUsers = await MembershipUser.countDocuments();
+    const totalPagesMembership = Math.ceil(totalMembershipUsers / limit);
     const recentMembershipGetters = await MembershipUser.find()
       .sort({ LastAccessed: -1 })
-      .limit(10);
+      .skip((pageMembership - 1) * limit)
+      .limit(limit);
+
+    const totalGitHubUsers = await GitHub_101_User.countDocuments();
+    const totalPagesGitHub = Math.ceil(totalGitHubUsers / limit);
     const recentGitHubGetters = await GitHub_101_User.find()
       .sort({ LastAccessed: -1 })
-      .limit(10);
+      .skip((pageGitHub - 1) * limit)
+      .limit(limit);
 
-    const totalMembershipUsers = await MembershipUser.countDocuments();
-    const membersWithCertificates = await MembershipUser.countDocuments({ LastAccessed: { $exists: true } });
-    const totalGitHubUsers = await GitHub_101_User.countDocuments();
-    const githubUsersWithCertificates = await GitHub_101_User.countDocuments({ LastAccessed: { $exists: true } });
     res.render('admin', {
       recentMembershipGetters,
-      membersWithCertificates,
+      membersWithCertificates: await MembershipUser.countDocuments({ LastAccessed: { $exists: true } }),
       totalMembershipUsers,
       recentGitHubGetters,
-      githubUsersWithCertificates,
+      githubUsersWithCertificates: await GitHub_101_User.countDocuments({ LastAccessed: { $exists: true } }),
       totalGitHubUsers,
+      currentPageMembership: pageMembership,
+      totalPagesMembership,
+      currentPageGitHub: pageGitHub,
+      totalPagesGitHub,
+      limit
     });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
+  } catch (error) {
+    console.error("Error fetching admin stats:", error);
+    res.status(500).send("Internal Server Error");
   }
-})
+});
 
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on: http://localhost:${PORT}/admin`);
 });
+// http://localhost:3001/admin?page=1&limit=1
 
 process.on("SIGINT", async () => {
   await mongoose.connection.close();

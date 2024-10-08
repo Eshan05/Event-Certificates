@@ -49,15 +49,18 @@
             <p class="text-[.75em]"><span class="">Total:</span> <%= totalGitHubUsers %></p>
             <p class="text-[.75em]"><span>Obtained:</span> <%= githubUsersWithCertificates %></p>
           </aside>
-          <h3>Recent Certificate Getters</h3>
-          <ul><!--noformat-->
-            <% recentGitHubGetters.forEach(user => { %>
-              <li>
-                <strong>Name:</strong> <%= user.Name %> - 
-                <strong>Last Accessed:</strong> <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %>
-              </li>
-            <% }); %>
-      <!--noformat--></ul>
+          <h3>Recent GitHub Certificate Getters</h3>
+          <ul> <% recentGitHubGetters.forEach(user => { %> <li>
+              <strong>Name:</strong> <%= user.Name %> - <strong>Last Accessed:</strong>
+              <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %>
+            </li> <% }); %> </ul>
+          <div class="pagination"> <% if (currentPageGitHub > 1) { %> <a
+              href="/admin?pageGitHub=<%= currentPageGitHub - 1 %>&limit=<%= limit %>">Previous</a> <% } %>
+            <% for (let i = 1; i <= totalPagesGitHub; i++) { %> <% if (i === currentPageGitHub) { %>
+            <strong><%= i %></strong> <% } else { %> <a
+              href="/admin?pageGitHub=<%= i %>&limit=<%= limit %>"><%= i %></a> <% } %> <% } %>
+            <% if (currentPageGitHub < totalPagesGitHub) { %> <a
+              href="/admin?pageGitHub=<%= currentPageGitHub + 1 %>&limit=<%= limit %>">Next</a> <% } %> </div>
         </article>
       </section>
     </main>

@@ -10,7 +10,7 @@
 }
 
 .dark .cardlink {
-  background-color: #2a2b32;
+  background-color: #272727;
   border: none;
   border-radius: 1rem;
   box-shadow:
@@ -26,5 +26,12 @@ body { counter-reset: ul; }
 li { counter-increment: li;}
 
 li::after {
-  content: " (" counter(section) ")";
+  content: "" counter(section) "";
+  font-size: .75em;
+  font-weight: 600;
+  color: #777;
+  position: absolute;
+  right: -2em;
+  top: 50%;
+  transform: translateY(-50%);
 }
