@@ -2,18 +2,21 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const path = require("path");
 const { PDFDocument, rgb, StandardFonts } = require("pdf-lib");
+const fontkit = require("@pdf-lib/fontkit");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env.local" });
 dotenv.config();
-const path = require("path");
-const fontkit = require("@pdf-lib/fontkit");
-// const rateLimit = require('express-rate-limit');
+
+const MembershipUserSchema = require('./models/membership');
+const GitHubUserSchema = require('./models/github');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
+// const rateLimit = require('express-rate-limit');
 // Rate limiting (uncomment to use)
 // const limiter = rateLimit({
 //   windowMs: 15 * 60 * 1000,
@@ -40,35 +43,6 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-const GitHubUserSchema = new mongoose.Schema({
-  CertID: { type: String, required: true, unique: true },
-  Name: { type: String, required: true },
-  Class: { type: String, enum: ["BE", "TE", "SE"], required: true },
-  LastAccessed: { type: Date, default: null },
-  Feedback: { type: String, default: null },
-});
-
-const MembershipUserSchema = new mongoose.Schema({
-  MemberID: { type: String, required: true },
-  Name: { type: String, required: true },
-  Email: { type: String, required: true },
-  PositionGroup: {
-    type: String,
-    enum: ["Executive", "Team Lead", "Member"],
-    default: "Member",
-    required: true,
-  },
-  Position: { type: String, required: true },
-  AcademicYear: {
-    type: String,
-    enum: ["2022-23", "2023-24", "2024-25"],
-    required: true,
-  },
-  Class: { type: String, enum: ["BE", "TE", "SE"], required: true },
-  CertID: { type: String, unique: true },
-  LastAccessed: { type: Date, default: null },
-});
-
 app.use(express.static(__dirname + "/public"));
 const MembershipUser = mongoose.model(
   "Members",
@@ -94,7 +68,7 @@ function sendResponse(res, message) {
 
 app.get("/", (req, res) => { res.render("gateway"); });
 app.get("/faqs", (req, res) => { res.render("faqs"); });
-app.get("/verify", (req, res) => { res.render("verify", { user: null, showForm: true, error: null }); });
+app.get("/verify", (req, res) => { res.render("verify", { user: null, showForm: true, error: null, success: false, EventName: null }); });
 
 app.get("/Membership", (req, res) => { res.render("Membership"); });
 app.get("/GitHub_101", (req, res) => { res.render("GitHub_101"); });
@@ -281,7 +255,7 @@ async function generatePdfWithName_Membership(user) {
       color: rgb(0, 0, 0),
     });
 
-    const nameTextWidth = NameFont.widthOfTextAtSize(name, 30);
+    const nameTextWidth = NameFont.widthOfTextAtSize(Name, 30);
     const nameX = (width - nameTextWidth) / 2;
     page.drawText(Name, {
       x: nameX,

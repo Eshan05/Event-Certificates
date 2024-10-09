@@ -2,16 +2,17 @@
 
 ![Main](./public/images/1727322512391.png "Main")
 
-A certificate website with ability to hand out multiple certificate in PDF Format for various events. It has a nice, minimal and interactive UI which is responsive for small as well as large screens. Built using Node/Express and MongoDB it allows for multiple template, multiple schemas/models and a central CSV processor alongside indiviual ones. At a glance the app consists of
+A certificate website with ability to hand out multiple certificate in PDF Format for various events. It has a nice, minimal and interactive UI which is responsive for small as well as large screens. Built using Node/Express and MongoDB it allows for multiple template, multiple schemas/models and a central CSV processor alongside individual ones. At a glance the app consists of
 
 - **🌐 Node/Express Backend**: with main entry via `app.js` into `gateway.ejs`.
-- **📊 CSV Exports**: Specific datasets in `Datasets/` which are uploaded via files in `CSV_Handlers`. Includes a centralized CSV Processor.
-- **🖼️ Dynamic PDF Generation**: Many templates which are programatically written to via **`pdflib`** allowing for OpenType fonts and high customization.
+- **📊 CSV Imports**: Specific datasets in `Datasets/` which are uploaded via files in `CSV_Handlers`. Includes a centralized CSV Processor.
+- **🖼️ Dynamic PDF Generation**: Many templates which are programmatically written to via **`pdflib`** allowing for OpenType fonts and high customization.
 - **✅ Proper Tests**: Tests written in **Jest** to streamline the process.
 - **🎨 UI/UX**: A minimal and responsive UI which can be easily modified as per liking. Uses **Tailwind CSS** and has dark mode.
 - **📈 Scalability**: Scalable for large datasets with good error handling and easy to modify.
 - **🔍 PDF Layout Testing**: Allows you to test out placement of text on any PDF via `try-pdf.ejs`. Includes setting font size and font family.
 - **🔔 Toasts**: Features a great, minimal and stacking toast functionality with various types as per requirements
+- **🥇 Verification**: Verify certificates with the unique `CertID` provided with every certificate. You can return information corresponding to the event the certificate was for
 - **📝 Feedback & FAQs**: A feedback optionality in the forms. A dedicated FAQs page and redirects in case of errors. Loading indicator during page load
 - **📋 Admin Dashboard**: An admin dashboard with **pagination** and **sentiment analysis**. Shows total number of users attended, number of users who got their certificates and most recent certificate receivers. Also uses `chartjs`.
 
@@ -45,12 +46,12 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 
 ### More Images
 
-![Main](./public/images/darkmobile_main.png "Main")
-![Main](./public/images/feedback_dark.png "Main")
-![Main](./public/images/faqsmobile_dark.png "Main")
-![Main](./public/images/trypdf_dark.png "Main")
-![Main](./public/images/dashboard_dark.png "Main")
-![Main](./public/images/dashboardmobile_light.png "Main")
+![Main Page on Mobile in Dark Mode](./public/images/darkmobile_main.png "Main")
+![Feedback on Github Page in Dark Mode](./public/images/feedback_dark.png "Github Page Feedback")
+![FAQs on Mobile in Dark Mode](./public/images/faqsmobile_dark.png "Mobile FAQs")
+![Try PDF page in Dark Mode](./public/images/trypdf_dark.png "Try PDF Page")
+![Admin Dashboard in Dark Mode](./public/images/dashboard_dark.png "Admin Dashboard")
+![Dashboard on Mobile in Light mode](./public/images/dashboardmobile_light.png "Mobile Admin Dashboard")
 
 ---
 
