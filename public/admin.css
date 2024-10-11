@@ -100,9 +100,11 @@ ul[class="cardlink"]::scrollbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin: 1rem 1rem 0 1rem;
+  flex-wrap: wrap;
   column-gap: 1rem;
   font-size: 1rem;
+  row-gap: 1rem;
 
   & a {
     padding: 0.25rem .5rem;

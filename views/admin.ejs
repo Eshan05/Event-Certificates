@@ -59,7 +59,7 @@
               <% if (currentPageMembership < totalPagesMembership) { %> 
                 <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageMembership=<%= currentPageMembership + 1 %>&limit=<%= limit %>">▶</a> 
               <% } %> 
-            </div><!--noformat-->
+          </div><!--noformat-->
         </article>
         <article class="border dark:border-[#444] border-[#bbb]">
           <header class="cardlink">
@@ -88,21 +88,21 @@
                   class="small-caps"> <%= user.sentimentScore %></span> </span>
             </li> <% }); %>
           </ul><!--noformat-->
-          <div class="pagination"> 
-            <% if (currentPageGitHub > 1) { %> 
-              <a class="bg-[#cecece] dark:bg-[#373737]"
-              href="/admin?pageGitHub=<%= currentPageGitHub - 1 %>&limit=<%= limit %>">◀</a> 
-            <% } %>
-            <% for (let i = 1; i <= totalPagesGitHub; i++) { %>
-              <% if (i === currentPageGitHub) { %> 
-                <strong class="bg-blue-600/40 dark:bg-blue-500/40"><%= i %></strong> 
-                <% } else { %> 
-                  <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= i %>&limit=<%= limit %>"><%= i %></a>
+            <div class="pagination"> 
+              <% if (currentPageGitHub > 1) { %> 
+                <a class="bg-[#cecece] dark:bg-[#373737]"
+                href="/admin?pageGitHub=<%= currentPageGitHub - 1 %>&limit=<%= limit %>">◀</a> 
+              <% } %>
+              <% for (let i = 1; i <= totalPagesGitHub; i++) { %>
+                <% if (i === currentPageGitHub) { %> 
+                  <strong class="bg-blue-600/40 dark:bg-blue-500/40"><%= i %></strong> 
+                  <% } else { %> 
+                    <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= i %>&limit=<%= limit %>"><%= i %></a>
+                  <% } %> 
                 <% } %> 
-              <% } %> 
-              <% if (currentPageGitHub < totalPagesGitHub) { %> 
-                <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= currentPageGitHub + 1 %>&limit=<%= limit %>">▶</a> 
-              <% } %> 
+                <% if (currentPageGitHub < totalPagesGitHub) { %> 
+                  <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= currentPageGitHub + 1 %>&limit=<%= limit %>">▶</a> 
+                <% } %> 
             </div><!--noformat-->
         </article>
       </section>
@@ -178,7 +178,7 @@
         labels: ['Event 1', 'Event 2'],
         datasets: [
           {
-            label: 'Total Membership Users',
+            label: 'Total Members',
             data: [
               <%= totalMembershipUsers %>,
               0
@@ -188,7 +188,7 @@
             borderWidth: 1,
           },
           {
-            label: 'Members with Certificates',
+            label: 'Members Certificates Given',
             data: [
               <%= membersWithCertificates %>,
               0
@@ -198,7 +198,7 @@
             borderWidth: 1,
           },
           {
-            label: 'Total GitHub Users',
+            label: 'Total GitHub',
             data: [
               0, 
               <%= totalGitHubUsers %> 
@@ -208,7 +208,7 @@
             borderWidth: 1,
           },
           {
-            label: 'GitHub Users with Certificates',
+            label: 'GitHub Certificates Given',
             data: [
               0, 
               <%= githubUsersWithCertificates %> 
