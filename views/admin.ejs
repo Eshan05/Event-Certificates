@@ -106,11 +106,16 @@
             </div><!--noformat-->
         </article>
       </section>
-      <section class="lg:w-1/2 mx-auto flex flex-col lg:flex-row">
-        <canvas id="myPieChart" width="400" height="400"></canvas>
+      <section class="lg:w-1/2 mx-auto flex flex-col lg:flex-row justify-center items-center p-1 gap-4">
+        <div class="flex justify-center items-center p-2 m-2">
+          <canvas id="myPieChart" width="400" height="400"></canvas>
+        </div>
+        <div class="flex justify-center items-center p-2 m-2">
+          <canvas id="myBarChart" width="400" height="400"></canvas>
+        </div>
       </section>
     </main>
-    <footer class="flex flex-row gap-x-4 items-center justify-center mt-auto pt-8 pb-2">
+    <footer class="flex flex-row gap-x-4 items-center justify-evenly mt-auto pt-8 pb-2">
       <button id="theme-toggle" class="aspect-square inline-block w-5 md:w-6 pt-px">
         <svg class="dark:hidden" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
           <path class="fill-black"
@@ -130,6 +135,7 @@
   <script src="util.js"></script>
   <script>
     const ctx = document.getElementById('myPieChart').getContext('2d');
+    const canvasContext = document.getElementById('myBarChart').getContext('2d');
     const data = {
       labels: ['GitHub Certificates', 'Membership Certificates'],
       datasets: [{
@@ -144,7 +150,8 @@
           '#aaa'
         ],
         borderWidth: 1
-      }]
+      }
+      ]
     };
 
     const myPieChart = new Chart(ctx, {
@@ -159,10 +166,55 @@
           },
           title: {
             display: true,
-            text: 'Certificates Given Out per Event'
+            text: 'Certificates Given Out Per Event'
           }
         }
       },
+    });
+
+    const myBarChart = new Chart(canvasContext, {
+      type: 'bar',
+      data: {
+        labels: ['Event 1', 'Event 2'],
+        datasets: [
+          {
+            label: 'Total Membership Users',
+            data: [
+                    <%= totalMembershipUsers %>, 
+                    <%= membersWithCertificates %>
+                ],
+            backgroundColor: '#50e991aa',
+            borderColor: '#aaa',
+            borderWidth: 1,
+            fill: false,
+          },
+          {
+            label: 'Total GitHub Users',
+            data: [
+                    <%= totalGitHubUsers %>, 
+                    <%= githubUsersWithCertificates %>
+                ],
+            backgroundColor: '#009fffaa',
+            borderColor: '#aaa',
+            borderWidth: 1,
+            fill: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true } },
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Event Comparisons'
+          }
+        }
+      }
     });
   </script>
 
