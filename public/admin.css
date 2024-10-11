@@ -27,6 +27,7 @@ ul {
   position: relative;
   width: 100%;
 }
+
 ul > li { 
   counter-increment: li;
   max-width: 80%;
@@ -34,7 +35,8 @@ ul > li {
 
 li::after {
   content: "" counter(li) "";
-  font-size: .75em;
+  /* font-family: monospace; */
+  /* font-size: .75em; */
   font-weight: 600;
   color: #777;
   position: absolute;

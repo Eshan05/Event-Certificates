@@ -37,9 +37,10 @@
           <ul class="cardlink"><!--noformat-->
             <h3 class="mb-4">Recent Certificates</h3>
             <% recentMembershipGetters.forEach(user => { %>
-              <li class="flex flex-col items-start border-b border-gray-500 p-3 w-fit relative">
-                <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-user w-4 aspect-square"></i> <%= user.Name %> </span> 
-                <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-clock w-4 aspect-square"></i> <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %> </span>
+              <!-- <li class="flex flex-col items-start border-b border-gray-500 p-3 w-fit relative"> -->
+              <li class="text-base lg:text-lg">
+                <span class="flex items-center gap-x-3"><i class="fa-regular fa-user w-4 aspect-square"></i> <%= user.Name %> </span> 
+                <span class="flex items-center gap-x-3"><i class="fa-regular fa-clock w-4 aspect-square"></i> <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %> </span>
               </li>
             <% }); %>
       <!--noformat--> </ul> <!--noformat-->
@@ -72,14 +73,15 @@
             </aside>
           </header>
           <ul class="cardlink">
-            <h3 class="mb-4">Recent Certificates</h3> <% recentGitHubGetters.forEach(user => { %> <li>
-              <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-user w-4 aspect-square"></i>
+            <h3 class="mb-4">Recent Certificates</h3> <% recentGitHubGetters.forEach(user => { %> <li
+              class="text-base lg:text-lg">
+              <span class="flex items-center gap-x-3"><i class="fa-regular fa-user w-4 aspect-square"></i>
                 <%= user.Name %> </span>
-              <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-clock w-4 aspect-square"></i>
+              <span class="flex items-center gap-x-3"><i class="fa-regular fa-clock w-4 aspect-square"></i>
                 <%= user.LastAccessed ? user.LastAccessed.toLocaleString() : 'N/A' %> </span>
-              <span class="flex items-center text-base gap-x-3"><i class="fa-regular fa-comments w-4 aspect-square"></i>
+              <span class="flex items-center gap-x-3"><i class="fa-regular fa-comments w-4 aspect-square"></i>
                 <%= user.Feedback %> </span>
-              <span class="flex items-center text-base gap-x-3">
+              <span class="flex items-center gap-x-3">
                 <i class="fa-regular w-4 aspect-square 
                       <%= user.sentimentClass === 'Positive' ? 'fa-smile' : 
                          user.sentimentClass === 'Negative' ? 'fa-frown' : 'fa-meh' %>"></i> Sentiment: <span
