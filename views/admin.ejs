@@ -5,8 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Certificate | Your Organization</title>
-    <link rel="icon" type="image/x-icon"
-      href="https://raw.githubusercontent.com/ACES-RMDSSOE/Website/main/images/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="" />
     <script src="https://cdn.tailwindcss.com" rel="preload"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,10 +26,12 @@
           <header class="flex justify-between items-center cardlink px-5 text-xl">
             <h2 class="small-caps">Membership</h2>
             <aside class="flex w-full justify-end gap-x-4 my-2">
-              <p class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-blue-400/60 drop-shadow rounded-xl">
+              <p title="Total Members in Database"
+                class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-blue-400/60 dark:bg-blue-400/40 drop-shadow rounded-xl">
                 <%= totalMembershipUsers %> </span>
               </p>
-              <p class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-green-400/60 drop-shadow rounded-xl">
+              <p title="Members who have received certificates"
+                class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-green-400/60 dark:bg-green-400/40 drop-shadow rounded-xl">
                 <%= membersWithCertificates %> </p>
             </aside>
           </header>
@@ -109,10 +110,12 @@
           <header class="cardlink">
             <h2 class="small-caps">GitHub 101</h2>
             <aside class="">
-              <p class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-blue-400/60 drop-shadow rounded-xl">
+              <p title="Total Attendees for event"
+                class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-blue-400/60 dark:bg-blue-400/40 drop-shadow rounded-xl">
                 <%= totalGitHubUsers %> </span>
               </p>
-              <p class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-green-400/60 drop-shadow rounded-xl">
+              <p title="Attendees who have received certificates"
+                class="text-[.75em] px-3 py-1.5 border border-gray-500 bg-green-400/60 dark:bg-green-400/40 drop-shadow rounded-xl">
                 <%= githubUsersWithCertificates %> </p>
             </aside>
           </header>
