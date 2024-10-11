@@ -52,6 +52,7 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 ![Try PDF page in Dark Mode](./public/images/trypdf_dark.png "Try PDF Page")
 ![Admin Dashboard in Dark Mode](./public/images/dashboard_dark.png "Admin Dashboard")
 ![Dashboard on Mobile in Light mode](./public/images/dashboardmobile_light.png "Mobile Admin Dashboard")
+![Verify Page in Dark mode](./public/images/verify_dark.png "Verify Page")
 
 ---
 
