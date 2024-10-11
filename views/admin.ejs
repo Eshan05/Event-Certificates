@@ -44,21 +44,65 @@
               </li>
             <% }); %>
       <!--noformat--> </ul> <!--noformat-->
+          <% 
+            const maxVisiblePages = 3; // Total number of visible page links
+            let displayPages = [];
+            let startPage, endPage;
+
+            // Always show first and last pages
+            const showFirstPage = (currentPageMembership > 2); // Show if current page is more than 3
+            const showLastPage = (currentPageMembership < totalPagesMembership - 2); // Show if current page is less than total pages - 2
+
+            if (totalPagesMembership <= maxVisiblePages) {
+              startPage = 1;
+              endPage = totalPagesMembership;
+            } else {
+                // Calculate start and end pages
+                if (currentPageMembership <= Math.ceil(maxVisiblePages / 2)) {
+                  startPage = 1;
+                  endPage = maxVisiblePages;
+                } else if (currentPageMembership + Math.floor(maxVisiblePages / 2) >= totalPagesMembership) {
+                  startPage = totalPagesMembership - maxVisiblePages + 1;
+                  endPage = totalPagesMembership;
+                } else {
+                  startPage = currentPageMembership - Math.floor(maxVisiblePages / 2);
+                  endPage = currentPageMembership + Math.floor(maxVisiblePages / 2);
+                }
+            }
+
+            // Create the display pages array
+            if (showFirstPage) {
+              displayPages.push(1); // Always show the first page
+              if (startPage > 2) displayPages.push('...'); // Add ellipsis 
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+              displayPages.push(i);
+            }
+
+            if (showLastPage) {
+              if (endPage < totalPagesMembership - 1) displayPages.push('...'); // Add ellipsis if needed
+              displayPages.push(totalPagesMembership); // Always show the last page
+            }
+          %>
+
           <div class="pagination"> 
             <% if (currentPageMembership > 1) { %> 
               <a class="bg-[#cecece] dark:bg-[#373737]"
               href="/admin?pageMembership=<%= currentPageMembership - 1 %>&limit=<%= limit %>">◀</a> 
             <% } %>
-            <% for (let i = 1; i <= totalPagesMembership; i++) { %>
-              <% if (i === currentPageMembership) { %> 
-                <strong class="bg-blue-600/40 dark:bg-blue-500/40"><%= i %></strong> 
-                <% } else { %> 
-                  <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageMembership=<%= i %>&limit=<%= limit %>"><%= i %></a>
-                <% } %> 
+            <% displayPages.forEach((page) => { %>
+              <% if (page === '...') { %>
+                <span>...</span>
+              <% } else if (page === currentPageMembership) { %> 
+                <strong class="bg-blue-600/40 dark:bg-blue-500/40"><%= page %></strong> 
+              <% } else { %> 
+                <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageMembership=<%= page %>&limit=<%= limit %>"><%= page %></a>
               <% } %> 
-              <% if (currentPageMembership < totalPagesMembership) { %> 
-                <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageMembership=<%= currentPageMembership + 1 %>&limit=<%= limit %>">▶</a> 
-              <% } %> 
+            <% }); %>
+            <% if (currentPageMembership < totalPagesMembership) { %> 
+              <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageMembership=<%= currentPageMembership + 1 %>&limit=<%= limit %>">▶</a> 
+            <% } %> 
           </div><!--noformat-->
         </article>
         <article class="border dark:border-[#444] border-[#bbb]">
@@ -88,22 +132,59 @@
                   class="small-caps"> <%= user.sentimentScore %></span> </span>
             </li> <% }); %>
           </ul><!--noformat-->
-            <div class="pagination"> 
-              <% if (currentPageGitHub > 1) { %> 
-                <a class="bg-[#cecece] dark:bg-[#373737]"
-                href="/admin?pageGitHub=<%= currentPageGitHub - 1 %>&limit=<%= limit %>">◀</a> 
-              <% } %>
-              <% for (let i = 1; i <= totalPagesGitHub; i++) { %>
-                <% if (i === currentPageGitHub) { %> 
-                  <strong class="bg-blue-600/40 dark:bg-blue-500/40"><%= i %></strong> 
-                  <% } else { %> 
-                    <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= i %>&limit=<%= limit %>"><%= i %></a>
-                  <% } %> 
-                <% } %> 
-                <% if (currentPageGitHub < totalPagesGitHub) { %> 
-                  <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= currentPageGitHub + 1 %>&limit=<%= limit %>">▶</a> 
-                <% } %> 
-            </div><!--noformat-->
+          <% 
+            let displayPagesGitHub = [];
+            let startPageGitHub, endPageGitHub;
+
+            if (totalPagesGitHub <= maxVisiblePages) {
+              startPageGitHub = 1;
+              endPageGitHub = totalPagesGitHub;
+            } else {
+              if (currentPageGitHub <= Math.ceil(maxVisiblePages / 2)) {
+                startPageGitHub = 1;
+                endPageGitHub = maxVisiblePages;
+              } else if (currentPageGitHub + Math.floor(maxVisiblePages / 2) >= totalPagesGitHub) {
+                startPageGitHub = totalPagesGitHub - maxVisiblePages + 1;
+                endPageGitHub = totalPagesGitHub;
+              } else {
+                startPageGitHub = currentPageGitHub - Math.floor(maxVisiblePages / 2);
+                endPageGitHub = currentPageGitHub + Math.floor(maxVisiblePages / 2);
+              }
+            }
+
+            if (currentPageGitHub > 3) {
+              displayPagesGitHub.push(1);
+              if (startPageGitHub > 2) displayPagesGitHub.push('...');
+            }
+
+            for (let i = startPageGitHub; i <= endPageGitHub; i++) {
+              displayPagesGitHub.push(i);
+            }
+
+            if (currentPageGitHub < totalPagesGitHub - 2) {
+              if (endPageGitHub < totalPagesGitHub - 1) displayPagesGitHub.push('...');
+              displayPagesGitHub.push(totalPagesGitHub);
+            }
+          %>
+
+          <div class="pagination"> 
+            <% if (currentPageGitHub > 1) { %> 
+              <a class="bg-[#cecece] dark:bg-[#373737]"
+              href="/admin?pageGitHub=<%= currentPageGitHub - 1 %>&limit=<%= limit %>">◀</a> 
+            <% } %>
+            <% displayPagesGitHub.forEach((page) => { %>
+              <% if (page === '...') { %>
+                <span>...</span>
+              <% } else if (page === currentPageGitHub) { %> 
+                <strong class="bg-blue-600/40 dark:bg-blue-500/40"><%= page %></strong> 
+              <% } else { %> 
+                <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= page %>&limit=<%= limit %>"><%= page %></a>
+              <% } %> 
+            <% }); %>
+            <% if (currentPageGitHub < totalPagesGitHub) { %> 
+              <a class="bg-[#cecece] dark:bg-[#373737]" href="/admin?pageGitHub=<%= currentPageGitHub + 1 %>&limit=<%= limit %>">▶</a> 
+            <% } %> 
+          </div><!--noformat-->
         </article>
       </section>
       <section class="lg:w-1/2 mx-auto flex flex-col lg:flex-row justify-center items-center p-1 gap-4">
