@@ -180,31 +180,52 @@
           {
             label: 'Total Membership Users',
             data: [
-                    <%= totalMembershipUsers %>, 
-                    <%= membersWithCertificates %>
-                ],
+              <%= totalMembershipUsers %>,
+              0
+            ],
             backgroundColor: '#50e991aa',
             borderColor: '#aaa',
             borderWidth: 1,
-            fill: false,
+          },
+          {
+            label: 'Members with Certificates',
+            data: [
+              <%= membersWithCertificates %>,
+              0
+            ],
+            backgroundColor: '#009fffaa',
+            borderColor: '#aaa',
+            borderWidth: 1,
           },
           {
             label: 'Total GitHub Users',
             data: [
-                    <%= totalGitHubUsers %>, 
-                    <%= githubUsersWithCertificates %>
-                ],
+              0, 
+              <%= totalGitHubUsers %> 
+            ],
             backgroundColor: '#009fffaa',
             borderColor: '#aaa',
             borderWidth: 1,
-            fill: false,
+          },
+          {
+            label: 'GitHub Users with Certificates',
+            data: [
+              0, 
+              <%= githubUsersWithCertificates %> 
+            ],
+            backgroundColor: '#009fffaa',
+            borderColor: '#aaa',
+            borderWidth: 1,
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        scales: { y: { beginAtZero: true } },
+        scales: {
+          y: { beginAtZero: true },
+          x: { stacked: true }
+        },
         plugins: {
           legend: {
             position: 'top',
