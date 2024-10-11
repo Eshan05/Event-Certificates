@@ -82,7 +82,7 @@ app.get('/admin', async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
 
   try {
-    const totalMembershipUsers = await MembershipUser.countDocuments({ LastAccessed: { $exists: true, $ne: null, $ne: "" } });
+    const totalMembershipUsers = await MembershipUser.countDocuments();
     const totalPagesMembership = Math.ceil(totalMembershipUsers / limit);
     const recentMembershipGetters = await MembershipUser.find({
       LastAccessed: {
@@ -95,7 +95,7 @@ app.get('/admin', async (req, res) => {
       .skip((pageMembership - 1) * limit)
       .limit(limit);
 
-    const totalGitHubUsers = await GitHub_101_User.countDocuments({ LastAccessed: { $exists: true, $ne: null, $ne: "" } });
+    const totalGitHubUsers = await GitHub_101_User.countDocuments();
     const totalPagesGitHub = Math.ceil(totalGitHubUsers / limit);
     const recentGitHubGetters = await GitHub_101_User.find({
       LastAccessed: {
