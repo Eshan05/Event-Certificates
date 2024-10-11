@@ -9,3 +9,4 @@ package-lock.json
 views/index.ejs
 public/generated.pdf
 .vscode/extensions.json
+**/*T.csv

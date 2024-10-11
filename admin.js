@@ -79,19 +79,31 @@ const GitHub_101_User = mongoose.model(
 app.get('/admin', async (req, res) => {
   const pageMembership = parseInt(req.query.pageMembership) || 1; // Membership pagination
   const pageGitHub = parseInt(req.query.pageGitHub) || 1; // GitHub pagination
-  const limit = parseInt(req.query.limit) || 2;
+  const limit = parseInt(req.query.limit) || 10;
 
   try {
-    const totalMembershipUsers = await MembershipUser.countDocuments();
+    const totalMembershipUsers = await MembershipUser.countDocuments({ LastAccessed: { $exists: true, $ne: null, $ne: "" } });
     const totalPagesMembership = Math.ceil(totalMembershipUsers / limit);
-    const recentMembershipGetters = await MembershipUser.find()
+    const recentMembershipGetters = await MembershipUser.find({
+      LastAccessed: {
+        $exists: true,
+        $ne: null,
+        $ne: ""
+      }
+    })
       .sort({ LastAccessed: -1 })
       .skip((pageMembership - 1) * limit)
       .limit(limit);
 
-    const totalGitHubUsers = await GitHub_101_User.countDocuments();
+    const totalGitHubUsers = await GitHub_101_User.countDocuments({ LastAccessed: { $exists: true, $ne: null, $ne: "" } });
     const totalPagesGitHub = Math.ceil(totalGitHubUsers / limit);
-    const recentGitHubGetters = await GitHub_101_User.find()
+    const recentGitHubGetters = await GitHub_101_User.find({
+      LastAccessed: {
+        $exists: true,
+        $ne: null,
+        $ne: ""
+      }
+    })
       .sort({ LastAccessed: -1 })
       .skip((pageGitHub - 1) * limit)
       .limit(limit);
@@ -107,10 +119,10 @@ app.get('/admin', async (req, res) => {
 
     res.render('admin', {
       recentMembershipGetters,
-      membersWithCertificates: await MembershipUser.countDocuments({ LastAccessed: { $exists: true } }),
+      membersWithCertificates: await MembershipUser.countDocuments({ LastAccessed: { $exists: true, $ne: null, $ne: "" } }),
       totalMembershipUsers,
       recentGitHubGetters: enrichedGitHubGetters,
-      githubUsersWithCertificates: await GitHub_101_User.countDocuments({ LastAccessed: { $exists: true } }),
+      githubUsersWithCertificates: await GitHub_101_User.countDocuments({ LastAccessed: { $exists: true, $ne: null, $ne: "" } }),
       totalGitHubUsers,
       currentPageMembership: pageMembership,
       totalPagesMembership,
@@ -148,3 +160,10 @@ process.on("SIGTSTP", () => {
   console.log("Received SIGTSTP (CTRL+Z). Triggering SIGINT.");
   process.kill(process.pid, "SIGINT"); // Send SIGINT to self
 });
+
+/**
+ * const recentGitHubGetters = await GitHub_101_User.find()
+      .sort({ LastAccessed: -1 })
+      .skip((pageGitHub - 1) * limit)
+      .limit(limit);
+ */

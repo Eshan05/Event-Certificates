@@ -74,6 +74,9 @@ article {
 ul[class="cardlink"] {
   padding: 1.5rem;
   margin-top: 1.5rem;
+  height: 50vh;
+  overflow-y: auto;
+  scrollbar-width: none !important;
 
   & li {
     position: relative;
@@ -85,6 +88,10 @@ ul[class="cardlink"] {
     border-bottom-color: rgb(107 114 128);
     border-bottom-style: solid;
   }
+}
+
+ul[class="cardlink"]::scrollbar {
+  display: none;
 }
 
 .pagination {

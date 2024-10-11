@@ -13,6 +13,7 @@ const GitHubUserSchema = new mongoose.Schema({
   CertID: { type: String, unique: true },
   Class: { type: String, enum: ["BE", "TE", "SE"], required: true },
   LastAccessed: { type: Date, default: null },
+  Feedback: { type: String, default: null },
 });
 
 // Method to generate CertID
@@ -49,7 +50,7 @@ async function processCSV() {
   await connectToDatabase();
   const savePromises = [];
   const stream = fs
-    .createReadStream("./Datasets/GitHub_101_data.csv")
+    .createReadStream("./Datasets/GitHub_101_dataT.csv")
     .pipe(csv());
 
   stream.on("data", (row) => {
