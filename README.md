@@ -1,4 +1,4 @@
-# Event Certificate Website
+# 🍁 Event Certificate Website
 
 ![Main](./public/images/1727322512391.png "Main")
 
@@ -16,16 +16,16 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 - **📝 Feedback & FAQs**: A feedback optionality in the forms. A dedicated FAQs page and redirects in case of errors. Loading indicator during page load
 - **📋 Admin Dashboard**: An admin dashboard with **pagination** and **sentiment analysis**. Shows total number of users attended, number of users who got their certificates and most recent certificate receivers. Also uses `chartjs`.
 
-## In Future
+## ⭐ In Future
 
-- [ ] Write more tests
+- [ ] ~~Write more tests~~
 - [X] Feedback system (Will expand on this)
 - [X] FAQs and better error page (Partially)
 - [X] Loading indicator
 - [X] Add an analytics page based on feedback, can see event-wise
-- [ ] Maybe add charts to above
+- [X] Maybe add charts to above
 
-## Setup
+## ⚙️ Setup
 
 1. Firstly make a MongoDB Atlas account and connect to it. (Preferably by VSCode Extension)
 2. Put your connection string in `.env.local` file.
@@ -37,14 +37,14 @@ A certificate website with ability to hand out multiple certificate in PDF Forma
 8. If you wish to use `try-pdf.ejs` then run `node generate.js`.
 9. To see admin dashboard run `admin.js`
 
-## Notes
+## 📝 Notes
 
 - See LICENSE.
 - I have put `generate.js` to run on separately from `app.js` with regards to production.
 - The basic idea is you have your events and workshops and what-not. The website helps you to give away certificates, you store the user data in CSV for people who attended them and upload it to MongoDB. The user has to visit the website and go to the respective event page then they put in their name and other details and simply get the certificate. The PDF generates in real time, not need to generate them beforehand (You will have to provide template in `Certificate_Templates` and CSV files goes in `CSV_Handlers`) 
 <!-- - This is not a CMS, you have to code in your own pages for each event and all other things.  -->
 
-### More Images
+### 📷 More Images
 
 ![Main Page on Mobile in Dark Mode](./public/images/darkmobile_main.png "Main")
 ![Feedback on Github Page in Dark Mode](./public/images/feedback_dark.png "Github Page Feedback")
